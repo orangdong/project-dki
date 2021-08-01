@@ -26,9 +26,9 @@
 											@endif
 										</div>
 										{{-- test file path --}}
-										<div class="row mb-7">
-											<a href="{{storage_path($user->surat)}}">Surat test</a>
-										</div>
+										{{-- <div class="row mb-7">
+											<a href="{{asset('storage/'.$user->surat)}}">Surat test</a>
+										</div> --}}
 										<!--begin::Row-->
 										<div class="row mb-7">
 											<!--begin::Label-->
