@@ -7,36 +7,23 @@
         <div class="card card-xl-stretch mb-xl-8">
             <!--begin::Header-->
             <div class="card-header border-0">
-                <h3 class="card-title fw-bolder text-dark">Tambah Pertanyaan</h3>
+                <h3 class="card-title fw-bolder text-dark">Tanya Pilihan Tunggal</h3>
             </div>
             <!--end::Header-->
             <!--begin::Body-->
             <div class="card-body pt-0">
-                <label class="required form-label">Tipe Pertanyaan</label>
+                <label class="required form-label">Pilih Tipe</label>
                 <div class="w-100 mb-10">
                     <select name="metode" required class="form-select form-select-solid" data-control="select2" data-placeholder="-" data-hide-search="true" data-select2-id="select2-data-18-0jcq" tabindex="-1" aria-hidden="true">
                         <option value="" data-select2-id="select2-data-18-0jcq"></option>
                         <option value="teks">Teks</option>
                         <option value="angka">Angka</option>
-                        <option value="pg">Pilihan Ganda</option>
                     </select>
                 </div>
                 <div class="mb-10">
                     <label class="required form-label">Pertanyaan</label>
                     <input type="text" name="pertanyaan" class="form-control form-control-solid" autocomplete="off" required />
                 </div>
-                <label class="form-check form-check-custom form-check-solid mb-3">
-                    <input class="form-check-input" type="checkbox" value="it"/>
-                    <span class="form-check-label">
-                        IT
-                    </span>
-                </label>
-                <label class="form-check form-check-custom form-check-solid mb-3">
-                    <input class="form-check-input" type="checkbox" value="finance"/>
-                    <span class="form-check-label">
-                        Finance
-                    </span>
-                </label>
             </div>
             <!--end::Body-->
         </div>
@@ -45,29 +32,31 @@
         <div class="card card-xl-stretch mb-xl-8">
             <!--begin::Header-->
             <div class="card-header border-0">
-                <h3 class="card-title fw-bolder text-dark">Tujuan</h3>
+                <h3 class="card-title fw-bolder text-dark">Tanya Pilihan Ganda</h3>
             </div>
             <!--end::Header-->
             <!--begin::Body-->
             <div class="card-body pt-0">
-                <label class="form-check form-check-custom form-check-solid mb-3">
-                    <input class="form-check-input" type="checkbox" value="kesehatan"/>
-                    <span class="form-check-label">
-                        Kesehatan
-                    </span>
-                </label>
-                <label class="form-check form-check-custom form-check-solid mb-3">
-                    <input class="form-check-input" type="checkbox" value="it"/>
-                    <span class="form-check-label">
-                        IT
-                    </span>
-                </label>
-                <label class="form-check form-check-custom form-check-solid mb-3">
-                    <input class="form-check-input" type="checkbox" value="finance"/>
-                    <span class="form-check-label">
-                        Finance
-                    </span>
-                </label>
+                <label class="required form-label">Pilih Tipe</label>
+                <div class="w-100 mb-5">
+                    <select name="metode" required class="form-select form-select-solid" data-control="select2" data-placeholder="-" data-hide-search="true" data-select2-id="select2-data-18-0jcq" tabindex="-1" aria-hidden="true">
+                        <option value="" data-select2-id="select2-data-18-0jcq"></option>
+                        <option value="teks">Teks</option>
+                        <option value="angka">Angka</option>
+                    </select>
+                </div>
+                <div class="mb-5">
+                    <label class="required form-label">Pertanyaan</label>
+                    <input type="text" name="pertanyaan" class="form-control form-control-solid" autocomplete="off" required />
+                </div>
+                <label class="required form-label">Jumlah Opsi</label>
+                <select class="form-select form-select-solid mb-5" name="jumlah_opsi" onchange="jumlahopsi(this);">
+                    <option value="">-</option>
+                    <?php for($jmlh_sesi=1; $jmlh_sesi<=10;  $jmlh_sesi++){ ?>
+                        <option value="<?php echo $jmlh_sesi; ?>"><?php echo $jmlh_sesi; ?></option>
+                    <?php } ?>
+                </select>
+                <div class="mt-3" id="tambah_barang"></div>
             </div>
             <!--end::Body-->
         </div>
@@ -161,7 +150,53 @@
             <!--begin::Body-->
         </div>
         <!-- end::Card -->
+        <!-- begin::Card -->
+        <div class="card card-xl-stretch mb-xl-8">
+            <!--begin::Header-->
+            <div class="card-header border-0">
+                <h3 class="card-title fw-bolder text-dark">Tujuan</h3>
+            </div>
+            <!--end::Header-->
+            <!--begin::Body-->
+            <div class="card-body pt-0">
+                <label class="form-check form-check-custom form-check-solid mb-3">
+                    <input class="form-check-input" type="checkbox" value="kesehatan"/>
+                    <span class="form-check-label">
+                        Kesehatan
+                    </span>
+                </label>
+                <label class="form-check form-check-custom form-check-solid mb-3">
+                    <input class="form-check-input" type="checkbox" value="it"/>
+                    <span class="form-check-label">
+                        IT
+                    </span>
+                </label>
+                <label class="form-check form-check-custom form-check-solid mb-3">
+                    <input class="form-check-input" type="checkbox" value="finance"/>
+                    <span class="form-check-label">
+                        Finance
+                    </span>
+                </label>
+            </div>
+            <!--end::Body-->
+        </div>
+        <!-- end::Card -->
     </div>
 </div>
 
+<script>
+function jumlahopsi(that){
+    var jmlh = that.value;
+    var x ="", i;
+    for (i=1; i<=jmlh; i++) {
+        x = x +
+            "<div class=\"mb-5\">" +
+            "<label class=\"required form-label\">Untuk Opsi " + i + "</label><br>" +
+            "<input type=\"text\" class=\"form-control form-control-solid mb-5\" placeholder=\"Opsi " + i +"\" name=\"opsi" + i + "\" required>" +
+            "</div>"
+        ;
+    }
+    document.getElementById("tambah_barang").innerHTML = x;
+}
+</script>
 @endsection('isi_halaman')

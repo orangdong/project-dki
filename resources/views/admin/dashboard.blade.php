@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('isi_halaman')
-
-
+<div class="row">
+    <div class="col">
         <!-- begin::Card -->
         <div class="card card-xl-stretch mb-xl-8">
             <!--begin::Header-->
@@ -44,7 +44,44 @@
             <!--end::Body-->
         </div>
         <!-- end::Card -->
+    </div>
+    <div class="col">
+        <!-- begin::Card -->
+        <div class="card card-xl-stretch mb-xl-8">
+            <!--begin::Header-->
+            <div class="card-header border-0">
+                <h3 class="card-title fw-bolder text-dark">Buat Form Baru</h3>
+            </div>
+            <!--end::Header-->
+            <!--begin::Body-->
+            <div class="card-body pt-0">
+                <div class="mb-10">
+                    <label class="required form-label">Judul</label>
+                    <input type="text" name="judul" class="form-control form-control-solid" autocomplete="off" required />
+                </div>
+                <div class="mb-10">
+                    <label class="required form-label">Deskripsi</label>
+                    <textarea type="text" name="deskripsi" class="form-control form-control-solid" autocomplete="off" required></textarea>
+                </div>
+                <div class="mb-10">
+                    <label class="required form-label">Valid Until</label>
+                    <input type="date" class="form-control form-control-solid" name="valid_until" placeholder="Pick a date" id="kt_datepicker_2"/>
+                </div>
+                <div class="mb-10">
+                    <input type="submit" class="btn btn-sm btn-success" value="Add"/>
+                </div>
+            </div>
+            <!--end::Body-->
+        </div>
+        <!-- end::Card -->
+    </div>
 
+</div>
+
+        
+<script>
+    $("#kt_datepicker_2").flatpickr();
+</script>
     
  
 
