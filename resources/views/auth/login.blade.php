@@ -58,17 +58,7 @@
 						<div class="w-lg-500px p-10 p-lg-15 mx-auto">
 							<!--begin::Form-->
 							<form class="form w-100"  method="post" action="{{ route('login') }}">
-								@if ($errors->any())
-    
-        <div class="font-medium text-red-600">{{ __('Whoops! Something went wrong.') }}</div>
-
-        <ul class="mt-3 list-disc list-inside text-sm text-red-600">
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    
-@endif
+								
 								@csrf
 								<!--begin::Heading-->
 								<div class="text-center mb-10">
@@ -86,6 +76,16 @@
 										{{ session('status') }}
 									</div>
 								@endif
+								<div class="fv-row mb-10">
+								@if ($errors->any())
+    								<div class="alert alert-danger" role="alert">
+									<p class="fw-bolder text-gray-800 fs-6">Something Went Wrong</p>
+           						 @foreach ($errors->all() as $error)
+									<span style="color: rgb(187, 8, 8)" class="text-mute fw-bold d-block">{{$error}}</span>
+            					@endforeach	
+									</div>
+								@endif
+								</div>
 								<!--begin::Input group-->
 								<div class="fv-row mb-10">
 									<!--begin::Label-->

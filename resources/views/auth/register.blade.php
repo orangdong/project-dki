@@ -3,7 +3,7 @@
 					<!--begin::Wrapper-->
 					<div class="w-lg-600px bg-white rounded shadow-sm p-10 p-lg-15 mx-auto">
 						<!--begin::Form-->
-						<form class="form w-100" id="kt_sign_up_form" action="{{ route('register') }}" method="post">
+						<form class="form w-100" enctype="multipart/form-data" id="kt_sign_up_form" action="{{ route('register') }}" method="post">
                             @csrf
 							<!--begin::Heading-->
 							<div class="mb-10 text-center">
@@ -17,6 +17,16 @@
 							</div>
 							<!--end::Heading-->
 							<!--begin::Input group-->
+							<div class="fv-row mb-10">
+								@if ($errors->any())
+    								<div class="alert alert-danger" role="alert">
+									<p class="fw-bolder text-gray-800 fs-6">Something Went Wrong</p>
+           						 @foreach ($errors->all() as $error)
+									<span style="color: rgb(187, 8, 8)" class="text-mute fw-bold d-block">{{$error}}</span>
+            					@endforeach	
+									</div>
+								@endif
+								</div>
 							<div class="fv-row mb-7">
 								<label class="form-label fw-bolder text-dark fs-6">Name</label>
 								<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="name" autocomplete="off" />
@@ -35,6 +45,25 @@
 							</div>
 							<!--end::Input group-->
 							<!--begin::Input group-->
+							<div class="fv-row mb-7">
+								<label class="form-label fw-bolder text-dark fs-6">Jabatan</label>
+								<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="jabatan" autocomplete="off" />
+							</div>
+							<!--end::Input group-->
+							<!--begin::Input group-->
+							<div class="fv-row mb-7">
+								<label class="form-label fw-bolder text-dark fs-6">Unit</label>
+								<select name="unit" required class="form-select form-select-solid" data-control="select2" data-placeholder="-" data-hide-search="true" data-select2-id="select2-data-18-0jcq" tabindex="-1" aria-hidden="true">
+									<option value="" data-select2-id="select2-data-18-0jcq"></option>
+									@forelse (App\Models\UserUnit::get() as $item)
+									<option value="{{$item->unit}}">{{$item->unit}}</option>
+									@empty
+										
+									@endforelse
+								</select>
+							</div>
+							<!--end::Input group-->
+							<!--begin::Input group-->
 							<div class="mb-10 fv-row" data-kt-password-meter="true">
 								<!--begin::Wrapper-->
 								<div class="mb-1">
@@ -50,25 +79,17 @@
 										</span>
 									</div>
 									<!--end::Input wrapper-->
-									<!--begin::Meter-->
-									<div class="d-flex align-items-center mb-3" data-kt-password-meter-control="highlight">
-										<div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
-										<div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
-										<div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
-										<div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px"></div>
-									</div>
-									<!--end::Meter-->
 								</div>
 								<!--end::Wrapper-->
 								<!--begin::Hint-->
-								<div class="text-muted">Use 8 or more characters with a mix of letters, numbers &amp; symbols.</div>
+								<div class="text-muted"></div>
 								<!--end::Hint-->
 							</div>
 							<!--end::Input group=-->
 							<!--begin::Input group-->
 							<div class="fv-row mb-5">
 								<label class="form-label fw-bolder text-dark fs-6">Confirm Password</label>
-								<input class="form-control form-control-lg form-control-solid" type="password" placeholder="" name="confirm-password" autocomplete="off" />
+								<input class="form-control form-control-lg form-control-solid" type="password" placeholder="" name="password_confirmation" autocomplete="off" />
 							</div>
 							<!--end::Input group-->
 							<!--begin::Input group-->
@@ -77,27 +98,10 @@
 								<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="staff_code" autocomplete="off" />
 							</div>
 							<!--end::Input group-->
-							<!--begin::Input group-->
-							<div class="fv-row mb-7">
-								<label class="form-label fw-bolder text-dark fs-6">Surat Penugasan</label>
-								<input class="form-control form-control-lg form-control-solid" type="file" placeholder="" name="surat" autocomplete="off" />
-							</div>
-							<!--end::Input group-->
-							<!--begin::Input group-->
-							<div class="fv-row mb-10">
-								<label class="form-check form-check-custom form-check-solid form-check-inline">
-									<input class="form-check-input" type="checkbox" name="toc" value="1" />
-									<span class="form-check-label fw-bold text-gray-700 fs-6">I Agree
-									<a href="#" class="ms-1 link-primary">Terms and conditions</a>.</span>
-								</label>
-							</div>
-							<!--end::Input group-->
 							<!--begin::Actions-->
 							<div class="text-center">
-								<button type="button" id="kt_sign_up_submit" class="btn btn-lg btn-primary">
-									<span class="indicator-label">Submit</span>
-									<span class="indicator-progress">Please wait...
-									<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+								<button type="submit" class="btn btn-lg btn-primary">
+									Daftar
 								</button>
 							</div>
 							<!--end::Actions-->

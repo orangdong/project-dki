@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('nip');
             $table->string('jabatan');
             $table->string('unit');
-            $table->string('surat');
+            $table->string('surat')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
