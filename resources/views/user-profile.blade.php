@@ -33,14 +33,29 @@
 										<!--begin::Input group-->
 										<div class="row mb-7">
 											<!--begin::Label-->
+											<label class="col-lg-4 fw-bold text-muted">Surat Penugasan
+											<i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Surat Penugasan"></i></label>
+											<!--end::Label-->
+											<!--begin::Col-->
+											<div class="col-lg-8">
+                                                <span>
+                                                    <form action="" method="post">
+                                                        <input type="file" name="surat" class="form-control form-control-solid" value="{{$user->surat}}" />
+												</span>
+											</div>
+											<!--end::Col-->
+										</div>
+										<!--end::Input group-->
+										<!--begin::Input group-->
+										<div class="row mb-7">
+											<!--begin::Label-->
 											<label class="col-lg-4 fw-bold text-muted">NIP
 											<i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="NIP"></i></label>
 											<!--end::Label-->
 											<!--begin::Col-->
 											<div class="col-lg-8">
                                                 <span>
-                                                    <form action="" method="post">
-                                                        <input type="number" name="nip" class="form-control form-control-solid" value="{{$user->nip}}" />
+                                                    <input type="number" name="nip" class="form-control form-control-solid" value="{{$user->nip}}" />
 												</span>
 											</div>
 											<!--end::Col-->
