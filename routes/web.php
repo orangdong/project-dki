@@ -32,6 +32,7 @@ Route::prefix('dashboard')
             Route::get('user', [AdminController::class, 'user'])->name('dashboard.user-management');
             Route::get('staff-code', [AdminController::class, 'staff_code'])->name('dashboard.staff-code');
             Route::get('buat-form', [AdminController::class, 'buat_form'])->name('dashboard.buat-form');
+            Route::post('edit-code', [AdminController::class, 'edit_code'])->name('edit-code');
         });
 
         Route::middleware(['isUser'])->group(function(){
