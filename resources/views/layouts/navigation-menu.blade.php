@@ -20,33 +20,33 @@
 										<!--begin::Menu-->
 										<div class="menu menu-lg-rounded menu-column menu-lg-row menu-state-bg menu-title-gray-700 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-400 fw-bold my-5 my-lg-0 align-items-stretch" id="#kt_header_menu" data-kt-menu="true">
 											@if(Auth::user()->role == 'user')
-											<div class="menu-item me-lg-1">
+											<div class="menu-item {{request()->routeIs('dashboard.user*') ? 'show' : ''}} me-lg-1">
 												<a class="menu-link py-3" href="#">
 													<span class="menu-title">Dashboard</span>
 												</a>
 											</div>
 											@else
-											<div class="menu-item me-lg-1">
+											<div class="menu-item {{request()->routeIs('dashboard.admin*') ? 'show' : ''}} me-lg-1">
 												<a class="menu-link py-3" href="{{ route('dashboard.admin') }}">
 													<span class="menu-title">Dashboard</span>
 												</a>
 											</div>
-											<div class="menu-item me-lg-1">
+											<div class="menu-item {{request()->routeIs('dashboard.user-management*') ? 'show' : ''}} me-lg-1">
 												<a class="menu-link py-3" href="{{ route('dashboard.user-management') }}">
 													<span class="menu-title">User</span>
 												</a>
 											</div>
 											<div class="menu-item me-lg-1">
-												<a class="menu-link py-3" href="{{ route('dashboard.export') }}">
+												<a class="menu-link {{request()->routeIs('dashboard.export*') ? 'show' : ''}} py-3" href="{{ route('dashboard.export') }}">
 													<span class="menu-title">Export</span>
 												</a>
 											</div>
-											<div class="menu-item me-lg-1">
+											<div class="menu-item {{request()->routeIs('dashboard.staff-code*') ? 'show' : ''}} me-lg-1">
 												<a class="menu-link py-3" href="{{ route('dashboard.staff-code') }}">
 													<span class="menu-title">Staff Code</span>
 												</a>
 											</div>
-											<div class="menu-item me-lg-1">
+											<div class="menu-item {{request()->routeIs('dashboard.buat-form*') ? 'show' : ''}} me-lg-1">
 												<a class="menu-link py-3" href="{{ route('dashboard.buat-form') }}">
 													<span class="menu-title">Buat Form</span>
 												</a>
