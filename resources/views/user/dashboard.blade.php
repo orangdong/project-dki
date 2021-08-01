@@ -36,7 +36,8 @@
                     </div>
                     <!--end::Title-->
                     <!--begin::Lable-->
-                    <a href="#" class="btn btn-info fw-bolder text-gray-200 py-1">Fill</a>
+                    <a href="#" class="btn btn-primary fw-bolder text-gray-200 py-1 me-3">Fill</a>
+                    <a href="#" class="btn btn-info fw-bolder text-gray-200 py-1">Edit</a>
                     <!--end::Lable-->
                 </div>
                 <!--end::Item-->
@@ -51,8 +52,7 @@
             <!--begin::Header-->
             <div class="card-header border-0 pt-5">
                 <h3 class="card-title align-items-start flex-column">
-                    <span class="card-label fw-bolder fs-3 mb-1">Members Statistics</span>
-                    <span class="text-muted mt-1 fw-bold fs-7">Over 500 members</span>
+                    <span class="card-label fw-bolder fs-3 mb-1">History Form</span>
                 </h3>
             </div>
             <!--end::Header-->
@@ -65,8 +65,7 @@
                         <!--begin::Table head-->
                         <thead>
                             <tr class="fw-bolder text-muted">
-                                <th class="min-w-150px">Authors</th>
-                                <th class="min-w-140px">Company</th>
+                                <th class="min-w-140px">Judul</th>
                                 <th class="min-w-120px">Progress</th>
                                 <th class="min-w-100px text-end">Actions</th>
                             </tr>
@@ -75,14 +74,6 @@
                         <!--begin::Table body-->
                         <tbody>
                             <tr>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <div class="d-flex justify-content-start flex-column">
-                                            <a href="#" class="text-dark fw-bolder text-hover-primary fs-6">Ana Simmons</a>
-                                            <span class="text-muted fw-bold text-muted d-block fs-7">HTML, JS, ReactJS</span>
-                                        </div>
-                                    </div>
-                                </td>
                                 <td>
                                     <a href="#" class="text-dark fw-bolder text-hover-primary d-block fs-6">Intertico</a>
                                     <span class="text-muted fw-bold text-muted d-block fs-7">Web, UI/UX Design</span>

@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use App\Models\StaffCode;
+use App\Models\UserUnit;
 
 class DatabaseSeeder extends Seeder
 {
@@ -24,5 +26,13 @@ class DatabaseSeeder extends Seeder
             'jabatan' => 'Kepala Bidang',
             'unit' => 'kesehatan'
         ]);
+
+        StaffCode::create([
+            'staff_code' => 'zilonglayla515'
+        ]);
+
+        UserUnit::create(['unit' => 'Pendidikan']);
+        UserUnit::create(['unit' => 'Keuangan']);
+        UserUnit::create(['unit' => 'Kesehatan']);
     }
 }
