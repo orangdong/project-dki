@@ -25,6 +25,7 @@ Route::prefix('dashboard')
     ->group(function()
     {   
         Route::get('user-profile', [UserController::class, 'edit'])->name('dashboard.profile');
+        Route::post('user-profile', [UserController::class, 'edit_profile'])->name('dashboard.profile.edit');
 
         Route::middleware(['isAdmin'])->group(function(){
             Route::get('form', [AdminController::class, 'index'])->name('dashboard.admin');

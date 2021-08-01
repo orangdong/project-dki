@@ -18,7 +18,10 @@ class isUser
     public function handle(Request $request, Closure $next)
     {
         $user = Auth::user(); 
-         if($user && $user->role == 'user'){ 
+         if($user && $user->role == 'user'){
+             if(!$user->surat){
+                return redirect(route('dashboard.profile')); 
+             } 
              return $next($request); 
             } 
         return redirect(route('dashboard.admin')); 
