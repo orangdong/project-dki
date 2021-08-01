@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\isAdmin;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +20,15 @@ Route::get('/', function () {
     return redirect(route('login'));
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('user.dashboard');
-})->name('dashboard');
+// is login
+Route::prefix('dashboard')
+    ->middleware(['auth:sanctum'])
+    ->group(function()
+    {   
+        Route::get('/', [UserController::class, 'index'])->name('dashboard');
+        
+        Route::middleware(['isAdmin'])->group(function(){
+            Route::get('form', [AdminController::class, 'index'])->name('form');
+        });
+        
+    });

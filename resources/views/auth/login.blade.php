@@ -89,7 +89,7 @@
 								<!--begin::Input group-->
 								<div class="fv-row mb-10">
 									<!--begin::Label-->
-									<label class="form-label fs-6 fw-bolder text-dark">{{ __('Username') }}</label>
+									<label class="form-label fs-6 fw-bolder text-dark">{{ __('Email') }}</label>
 									<!--end::Label-->
 									<!--begin::Input-->
 									<input class="form-control form-control-lg form-control-solid" type="text" name="email" autocomplete="off" :value="old('email')" required autofocus/>

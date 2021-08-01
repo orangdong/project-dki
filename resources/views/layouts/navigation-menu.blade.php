@@ -22,28 +22,28 @@
 											@if(Auth::user()->role == 'user')
 											<div class="menu-item me-lg-1">
 												<a class="menu-link py-3" href="/">
-													<span class="menu-title">Keranjang</span>
-												</a>
-											</div>
-											<div class="menu-item me-lg-1">
-												<a class="menu-link py-3" href="/dashboard/riwayat">
-													<span class="menu-title">Riwayat</span>
-												</a>
-											</div>
-											<div class="menu-item me-lg-1">
-												<a class="menu-link py-3" href="/dashboard/migrasi">
-													<span class="menu-title">Migrasi</span>
+													<span class="menu-title">Dashboard</span>
 												</a>
 											</div>
 											@else
 											<div class="menu-item me-lg-1">
-												<a class="menu-link py-3" href="/dashboard/navigasi">
-													<span class="menu-title">Navigasi</span>
+												<a class="menu-link py-3" href="/">
+													<span class="menu-title">Dashboard</span>
 												</a>
 											</div>
 											<div class="menu-item me-lg-1">
-												<a class="menu-link py-3" href="/dashboard/edit-toko">
-													<span class="menu-title">Toko</span>
+												<a class="menu-link py-3" href="/">
+													<span class="menu-title">User</span>
+												</a>
+											</div>
+											<div class="menu-item me-lg-1">
+												<a class="menu-link py-3" href="/">
+													<span class="menu-title">Export</span>
+												</a>
+											</div>
+											<div class="menu-item me-lg-1">
+												<a class="menu-link py-3" href="/">
+													<span class="menu-title">Staff Code</span>
 												</a>
 											</div>
 											@endif
@@ -89,7 +89,7 @@
 												<!--end::Menu separator-->
 												<!--begin::Menu item-->
 												<div class="menu-item px-5">
-													<a href="{{ route('dashboard.profile')}}" class="menu-link px-5">Profile</a>
+													<a href="#" class="menu-link px-5">Profile</a>
 												</div>
 												<!--end::Menu item-->
 												<!--begin::Menu item-->
