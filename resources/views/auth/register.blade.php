@@ -95,7 +95,7 @@
 							<!--begin::Input group-->
 							<div class="fv-row mb-7">
 								<label class="form-label fw-bolder text-dark fs-6">Staff Code</label>
-								<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="staff_code" autocomplete="off" />
+								<input class="form-control form-control-lg form-control-solid" type="password" placeholder="" name="staff_code" autocomplete="off" />
 							</div>
 							<!--end::Input group-->
 							<!--begin::Actions-->

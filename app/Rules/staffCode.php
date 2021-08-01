@@ -2,6 +2,7 @@
 
 namespace App\Rules;
 
+use App\Models\StaffCode as ModelsStaffCode;
 use Illuminate\Contracts\Validation\Rule;
 
 class staffCode implements Rule
@@ -25,7 +26,7 @@ class staffCode implements Rule
      */
     public function passes($attribute, $value)
     {
-        $staffCode = 'zilonglayla515';
+        $staffCode = ModelsStaffCode::first();
         return $value == $staffCode;
     }
 
