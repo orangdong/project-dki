@@ -15,4 +15,12 @@ class UserController extends Controller
             'title' => 'Dashboard'
         ]);
     }
+
+    public function edit(){
+        $user = Auth::user();
+        return view('user-profile', [
+            'user' => $user,
+            'title' => 'Edit Profile'
+        ]);
+    }
 }

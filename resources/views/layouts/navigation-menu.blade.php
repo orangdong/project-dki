@@ -21,29 +21,34 @@
 										<div class="menu menu-lg-rounded menu-column menu-lg-row menu-state-bg menu-title-gray-700 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-400 fw-bold my-5 my-lg-0 align-items-stretch" id="#kt_header_menu" data-kt-menu="true">
 											@if(Auth::user()->role == 'user')
 											<div class="menu-item me-lg-1">
-												<a class="menu-link py-3" href="/">
+												<a class="menu-link py-3" href="#">
 													<span class="menu-title">Dashboard</span>
 												</a>
 											</div>
 											@else
 											<div class="menu-item me-lg-1">
-												<a class="menu-link py-3" href="/">
+												<a class="menu-link py-3" href="{{ route('dashboard.admin') }}">
 													<span class="menu-title">Dashboard</span>
 												</a>
 											</div>
 											<div class="menu-item me-lg-1">
-												<a class="menu-link py-3" href="/">
+												<a class="menu-link py-3" href="{{ route('dashboard.user-management') }}">
 													<span class="menu-title">User</span>
 												</a>
 											</div>
 											<div class="menu-item me-lg-1">
-												<a class="menu-link py-3" href="/">
+												<a class="menu-link py-3" href="{{ route('dashboard.export') }}">
 													<span class="menu-title">Export</span>
 												</a>
 											</div>
 											<div class="menu-item me-lg-1">
-												<a class="menu-link py-3" href="/">
+												<a class="menu-link py-3" href="{{ route('dashboard.staff-code') }}">
 													<span class="menu-title">Staff Code</span>
+												</a>
+											</div>
+											<div class="menu-item me-lg-1">
+												<a class="menu-link py-3" href="{{ route('dashboard.buat-form') }}">
+													<span class="menu-title">Buat Form</span>
 												</a>
 											</div>
 											@endif
@@ -89,7 +94,7 @@
 												<!--end::Menu separator-->
 												<!--begin::Menu item-->
 												<div class="menu-item px-5">
-													<a href="#" class="menu-link px-5">Profile</a>
+													<a href="{{ route('dashboard.profile') }}" class="menu-link px-5">Profile</a>
 												</div>
 												<!--end::Menu item-->
 												<!--begin::Menu item-->
