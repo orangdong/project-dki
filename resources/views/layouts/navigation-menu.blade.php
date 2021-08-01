@@ -36,8 +36,8 @@
 													<span class="menu-title">User</span>
 												</a>
 											</div>
-											<div class="menu-item me-lg-1">
-												<a class="menu-link {{request()->routeIs('dashboard.export*') ? 'show' : ''}} py-3" href="{{ route('dashboard.export') }}">
+											<div class="menu-item {{request()->routeIs('dashboard.export*') ? 'show' : ''}} me-lg-1">
+												<a class="menu-link py-3" href="{{ route('dashboard.export') }}">
 													<span class="menu-title">Export</span>
 												</a>
 											</div>
