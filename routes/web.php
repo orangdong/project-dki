@@ -3,7 +3,6 @@
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Middleware\isAdmin;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,10 +24,12 @@ Route::prefix('dashboard')
     ->middleware(['auth:sanctum'])
     ->group(function()
     {   
-        Route::get('/', [UserController::class, 'index'])->name('dashboard');
-        
         Route::middleware(['isAdmin'])->group(function(){
-            Route::get('form', [AdminController::class, 'index'])->name('form');
+            Route::get('form', [AdminController::class, 'index'])->name('dashboard.admin');
+        });
+
+        Route::middleware(['isUser'])->group(function(){
+            Route::get('/', [UserController::class, 'index'])->name('dashboard.user');
         });
         
     });

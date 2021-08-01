@@ -7,16 +7,9 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function __construct()
-    {
-        $user = Auth::user();
-        if($user->role == "admin"){
-            return redirect(route('dashboard/form'));
-        }
-    }
 
     public function index(){
-        
+        $user = Auth::user();
         return view('user.dashboard', [
             'user' => $user,
             'title' => 'Dashboard'
