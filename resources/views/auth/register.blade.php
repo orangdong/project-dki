@@ -53,8 +53,8 @@
 							<!--begin::Input group-->
 							<div class="fv-row mb-7">
 								<label class="form-label fw-bolder text-dark fs-6">Unit</label>
-								<select name="unit" required class="form-select form-select-solid" data-control="select2" data-placeholder="-" data-hide-search="true" data-select2-id="select2-data-18-0jcq" tabindex="-1" aria-hidden="true">
-									<option value="" data-select2-id="select2-data-18-0jcq"></option>
+								<select name="unit" required class="form-select form-select-solid" data-control="select2" data-placeholder="-" data-hide-search="true"  tabindex="-1" aria-hidden="true">
+									<option value=""></option>
 									@forelse (App\Models\UserUnit::get() as $item)
 									<option value="{{$item->unit}}">{{$item->unit}}</option>
 									@empty
