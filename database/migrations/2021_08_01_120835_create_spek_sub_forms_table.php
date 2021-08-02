@@ -16,7 +16,6 @@ class CreateSpekSubFormsTable extends Migration
         Schema::create('spek_sub_forms', function (Blueprint $table) {
             $table->id();
             $table->foreignId('spek_form_id')->constrained('spek_forms')->onDelete('cascade');
-            $table->string('name')->nullable();
             $table->string('option');
             $table->timestamps();
         });

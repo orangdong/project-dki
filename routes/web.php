@@ -29,15 +29,20 @@ Route::prefix('dashboard')
 
         Route::middleware(['isAdmin'])->group(function(){
             Route::get('form', [AdminController::class, 'index'])->name('dashboard.admin');
+            Route::post('form', [AdminController::class, 'new_form'])->name('dashboard.new-form');
             Route::get('export', [AdminController::class, 'export'])->name('dashboard.export');
             Route::get('user', [AdminController::class, 'user'])->name('dashboard.user-management');
             Route::get('staff-code', [AdminController::class, 'staff_code'])->name('dashboard.staff-code');
             Route::get('buat-form', [AdminController::class, 'buat_form'])->name('dashboard.buat-form');
+            Route::post('spek-form-tunggal', [AdminController::class, 'spek_form_tunggal'])->name('dashboard.spek-form-tunggal');
+            Route::post('spek-form-ganda', [AdminController::class, 'spek_form_ganda'])->name('dashboard.spek-form-ganda');
+            Route::post('edit-tujuan-form', [AdminController::class, 'edit_tujuan_form'])->name('dashboard.edit-tujuan-form');
             Route::post('edit-code', [AdminController::class, 'edit_code'])->name('edit-code');
         });
 
         Route::middleware(['isUser'])->group(function(){
             Route::get('/', [UserController::class, 'index'])->name('dashboard.user');
+            Route::get('isi-form', [UserController::class, 'isi_form'])->name('dashboard.isi-form');
         });
         
     });

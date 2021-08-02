@@ -15,7 +15,7 @@ class SpekForm extends Model
     ];
 
     protected $fillable = [
-        'form_id', 'title', 'name', 'type'
+        'form_id', 'pertanyaan', 'type', 'data'
     ];
 
     public function form_attributes(){

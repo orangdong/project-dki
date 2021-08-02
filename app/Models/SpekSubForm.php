@@ -15,7 +15,11 @@ class SpekSubForm extends Model
     ];
 
     protected $fillable = [
-        'spek_form_id', 'name', 'option'
+        'spek_form_id', 'option'
     ];
+
+    public function spek_forms(){
+        return $this->BelongsTo(SpekForm::class);
+    }
 
 }

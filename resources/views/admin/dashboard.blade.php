@@ -11,6 +11,7 @@
             <!--end::Header-->
             <!--begin::Body-->
             <div class="card-body pt-0">
+                @foreach($form as $f)
                 <!--begin::Item-->
                 <div class="d-flex align-items-center bg-light-info rounded p-5">
                     <!--begin::Icon-->
@@ -30,16 +31,17 @@
                     <!--end::Icon-->
                     <!--begin::Title-->
                     <div class="flex-grow-1 me-2">
-                        <a href="#" class="fw-bolder text-gray-800 text-hover-primary fs-6">Product goals strategy</a>
-                        <span class="text-muted fw-bold d-block">Due in 7 Days</span>
+                        <a href="#" class="fw-bolder text-gray-800 text-hover-primary fs-6">{{ $f->title }}</a>
+                        <span class="text-muted fw-bold d-block">Valid Until {{ $f->valid_until }}</span>
                     </div>
                     <!--end::Title-->
                     <!--begin::Lable-->
                     <a href="#" class="btn btn-sm btn-info fw-bolder text-gray-200 py-1 me-3">Download</a>
-                    <a href="#" class="btn btn-sm btn-danger fw-bolder text-gray-200 py-1">Edit</a>
+                    <a href="{{ route('dashboard.buat-form').'?id='.$f->id }}" class="btn btn-sm btn-danger fw-bolder text-gray-200 py-1">Edit</a>
                     <!--end::Lable-->
                 </div>
                 <!--end::Item-->
+                @endforeach
             </div>
             <!--end::Body-->
         </div>
@@ -55,6 +57,8 @@
             <!--end::Header-->
             <!--begin::Body-->
             <div class="card-body pt-0">
+                <form action="{{route('dashboard.new-form')}}" method="post">
+                    @csrf
                 <div class="mb-10">
                     <label class="required form-label">Judul</label>
                     <input type="text" name="judul" class="form-control form-control-solid" autocomplete="off" required />
@@ -70,6 +74,7 @@
                 <div class="mb-10">
                     <input type="submit" class="btn btn-sm btn-success" value="Add"/>
                 </div>
+                </form>
             </div>
             <!--end::Body-->
         </div>

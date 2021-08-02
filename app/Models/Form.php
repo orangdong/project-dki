@@ -15,7 +15,7 @@ class Form extends Model
     ];
 
     protected $fillable = [
-        'nama', 'description', 'valid_until'
+        'title', 'description', 'valid_until'
     ];
 
     public function form_tujuans(){

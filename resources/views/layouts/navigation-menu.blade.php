@@ -21,7 +21,7 @@
 										<div class="menu menu-lg-rounded menu-column menu-lg-row menu-state-bg menu-title-gray-700 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-400 fw-bold my-5 my-lg-0 align-items-stretch" id="#kt_header_menu" data-kt-menu="true">
 											@if(Auth::user()->role == 'user')
 											<div class="menu-item {{request()->routeIs('dashboard.user*') ? 'show' : ''}} me-lg-1">
-												<a class="menu-link py-3" href="#">
+												<a class="menu-link py-3" href="{{ route('dashboard.user') }}">
 													<span class="menu-title">Dashboard</span>
 												</a>
 											</div>
@@ -44,11 +44,6 @@
 											<div class="menu-item {{request()->routeIs('dashboard.staff-code*') ? 'show' : ''}} me-lg-1">
 												<a class="menu-link py-3" href="{{ route('dashboard.staff-code') }}">
 													<span class="menu-title">Staff Code</span>
-												</a>
-											</div>
-											<div class="menu-item {{request()->routeIs('dashboard.buat-form*') ? 'show' : ''}} me-lg-1">
-												<a class="menu-link py-3" href="{{ route('dashboard.buat-form') }}">
-													<span class="menu-title">Buat Form</span>
 												</a>
 											</div>
 											@endif
