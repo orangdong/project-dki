@@ -16,6 +16,10 @@
     										<div style="border-radius: 8px; font-weight: 500" class="alert alert-success" role="alert">
         										{{request()->input('message')}}
     										</div>
+											@elseif(request()->input('error') == 1)
+											<div style="border-radius: 8px; font-weight: 500" class="alert alert-danger" role="alert">
+        										{{request()->input('message')}}
+    										</div>
     										@endif
 											@if($errors->any())
 											<div style="border-radius: 8px; font-weight: 500" class="alert alert-danger" role="alert">
@@ -128,13 +132,15 @@
 										<!--end::Input group-->
 										<!--begin::Input group-->
 										<div class="row mb-7">
+										
 											<!--begin::Label-->
 											<label class="col-lg-4 fw-bold text-muted">Password Lama</label>
 											<!--end::Label-->
 											<!--begin::Col-->
 											<div class="col-lg-8">
-                                                <form action="" method="post">
-                                                    <input class="form-control form-control-lg form-control-solid" type="password" name="password_lama" required autocomplete="current-password" />
+												<form action="{{route('change-password', $user->id)}}" method="post">
+													@csrf
+                                                    <input class="form-control form-control-lg form-control-solid" type="password" name="current_password" required autocomplete="current-password" />
 											</div>
 											<!--end::Col-->
 										</div>
@@ -146,7 +152,7 @@
 											<!--end::Label-->
 											<!--begin::Col-->
 											<div class="col-lg-8">
-                                                <input class="form-control form-control-lg form-control-solid" type="password" name="password_baru" required autocomplete="current-password" />
+                                                <input class="form-control form-control-lg form-control-solid" type="password" name="password" required autocomplete="current-password" />
 											</div>
 											<!--end::Col-->
 										</div>
@@ -158,9 +164,9 @@
 											<!--end::Label-->
 											<!--begin::Col-->
 											<div class="col-lg-8">
-												    <input class="form-control form-control-lg form-control-solid" type="password" name="password_baru_confirm" required autocomplete="current-password" />
+												    <input class="form-control form-control-lg form-control-solid" type="password" name="password_confirmation" required autocomplete="current-password" />
                                                     <br><button type="submit" style="background: #f1416c" class="btn btn-sm btn-flex btn-primary fw-bolder" >Ganti Password</button>
-                                                </form>
+                                        </form>
                                             </div>
 											<!--end::Col-->
 										</div>
