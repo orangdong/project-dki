@@ -26,7 +26,7 @@ class staffCode implements Rule
      */
     public function passes($attribute, $value)
     {
-        $staffCode = ModelsStaffCode::first();
+        $staffCode = ModelsStaffCode::first()->staff_code;
         return $value == $staffCode;
     }
 
