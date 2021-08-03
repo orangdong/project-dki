@@ -8,6 +8,8 @@ use App\Models\UserUnit;
 use App\Models\Form;
 use App\Models\SpekForm;
 use App\Models\SpekSubForm;
+use App\Models\FormValue;
+use App\Models\FormTujuan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -19,9 +21,26 @@ class UserController extends Controller
     public function index(){
         $user = Auth::user();
         $form = Form::all();
+        $kewajiban_form = FormTujuan::where('unit_tujuan',$user->unit)->get();
+        $form_id_history = [];
+        $form_id_unfinish = [];
+        foreach($kewajiban_form as $k){
+            $jumlah_spek_form = SpekForm::where('form_id',$k->form_id)->count(); //spek form yg dibuat admin ada brp
+            $jumlah_spek_form_diisi = FormValue::where([['user_id',$user->id],['form_id',$k->form_id]])->count(); //spek form yg diisi user ada brp
+            // buatan admin lebih banyak dri yg diisi -> blom kelar ->unfinish
+            // bautan admin <== yg diisi -> udah kelar ->history
+            if($jumlah_spek_form <= $jumlah_spek_form_diisi){
+                array_push($form_id_history, $k->form_id);
+            }else{
+                array_push($form_id_unfinish, $k->form_id);
+            }
+        }
+        
         return view('user.dashboard', [
             'user' => $user,
             'form' => $form,
+            'form_id_history' => $form_id_history,
+            'form_id_unfinish' => $form_id_unfinish,
             'title' => 'Dashboard'
         ]);
     }

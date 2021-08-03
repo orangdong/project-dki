@@ -15,6 +15,6 @@ class FormValue extends Model
     ];
 
     protected $fillable = [
-        'user_id', 'spek_form_id', 'value'
+        'user_id', 'form_id','spek_form_id', 'value'
     ];
 }
