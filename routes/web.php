@@ -44,6 +44,7 @@ Route::prefix('dashboard')
         Route::middleware(['isUser'])->group(function(){
             Route::get('/', [UserController::class, 'index'])->name('dashboard.user');
             Route::get('isi-form', [UserController::class, 'isi_form'])->name('dashboard.isi-form');
+            Route::post('submit-form', [UserController::class, 'submit_form'])->name('dashboard.submit-form');
         });
         
     });

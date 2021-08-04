@@ -125,4 +125,24 @@ class UserController extends Controller
             'title' => 'Isi Form'
         ]);
     }
+
+    public function submit_form(Request $request){
+        $user = Auth::user();
+        $form_id = $request->input('form_id');
+        $spek_form = SpekForm::where('form_id',$form_id)->get();
+        foreach($spek_form as $s){
+            $spek_form_id = $s->id; // dari belakang, merepresentasikan NAME html
+            $jawaban = $request->input($spek_form_id); // jawaban dari NAME tadi
+            if(is_array($jawaban)){
+                $jawaban = json_encode($jawaban);
+            }
+            FormValue::create([
+                'user_id' => $user->id,
+                'form_id' => $form_id,
+                'spek_form_id' => $spek_form_id,
+                'value' => $jawaban
+            ]);
+        }
+        return redirect(route('dashboard.admin'));
+    }
 }
