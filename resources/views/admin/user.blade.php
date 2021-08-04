@@ -35,12 +35,12 @@
                     <form action="{{route('edit-user')}}" method="post">
                         @csrf
                         <td>{{$u->name}}</td>
-                        <td><input type="email" name="email" class="form-control" value="{{$u->email}}" /></td>
-                        <td><input type="number" name="nip" class="form-control" value="{{$u->nip}}" /></td>
-                        <td><input type="text" name="jabatan" class="form-control" value="{{$u->jabatan}}" /></td>
+                        <td><input type="email" name="email" class="form-control w-auto" value="{{$u->email}}" /></td>
+                        <td><input type="number" name="nip" class="form-control w-auto" value="{{$u->nip}}" /></td>
+                        <td><input type="text" name="jabatan" class="form-control w-auto" value="{{$u->jabatan}}" /></td>
                         <td>
                             <div class="w-100">
-                                <select name="unit" required class="form-select" data-control="select2" data-placeholder="-" data-hide-search="true" tabindex="-1" aria-hidden="true">
+                                <select name="unit" required class="form-select w-auto" data-control="select2" data-placeholder="-" data-hide-search="true" tabindex="-1" aria-hidden="true">
                                     <option value="{{$u->unit}}">{{$u->unit}}</option>
                                     @foreach ($units->where('unit', '!=', $u->unit) as $unit)
                                     <option value="{{$unit->unit}}">{{$unit->unit}}</option>
@@ -54,8 +54,8 @@
                     </form>
                     <form action="{{route('change-user-password')}}" method="post">
                         @csrf
-                        <td><input class="form-control form-control-lg" type="password" name="password" required autocomplete="current-password" /></td>
-                        <td><input class="form-control form-control-lg" type="password" name="password_confirmation" required autocomplete="current-password" /></td>
+                        <td><input class="form-control form-control-lg w-auto" type="password" name="password" required autocomplete="current-password" /></td>
+                        <td><input class="form-control form-control-lg w-auto" type="password" name="password_confirmation" required autocomplete="current-password" /></td>
                         <td><button style="border: none" type="submit" class="badge badge-danger" >Ganti Password</button></td>
                         <input type="hidden" value="{{$u->id}}" name="user_id">
                     </form>
