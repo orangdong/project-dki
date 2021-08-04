@@ -127,7 +127,7 @@ class UserController extends Controller
     public function submit_form(Request $request){
         $user = Auth::user();
         $form_id = $request->input('form_id');
-        FormValue::where([['form_id',$form_id],['user_id',$user->id]])->delete();
+        //FormValue::where([['form_id',$form_id],['user_id',$user->id]])->delete();
         $spek_form = SpekForm::where('form_id',$form_id)->get(); //loop sebanyak pertanyaan yg dibikin ADMIN
         foreach($spek_form as $s){
             $spek_form_id = $s->id; // dari belakang, merepresentasikan NAME html
@@ -184,7 +184,7 @@ class UserController extends Controller
         $spek_form = SpekForm::where('form_id',$form_id)->with(['spek_sub_forms','form_values' => function($query){
             $query->where('user_id',Auth::user()->id);
         }])->get();
-
+        //return $spek_form;
         return view('user.edit-form', [
             'user' => $user,
             'spek_form' => $spek_form,

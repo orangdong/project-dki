@@ -14,44 +14,48 @@
     <div class="card-body py-3">
         <div class="alert alert-info mt-n5 mb-10">
             <p class="fw-bolder text-gray-800 fs-6">Deskripsi</p>
-            
             {{ $form->description }}</div>
         <form action="{{ route('dashboard.submit-form') }}" method="post">
             @csrf
             @foreach($spek_form as $s)
-                @foreach($s->form_values as $ss)
+                @if(isset($s->form_values[0]))
+                    @foreach($s->form_values as $ss)
+                        @php
+                            $spek_form_values = $ss->value
+                        @endphp
+                    @endforeach
+                @else
                     @php
-                        $spek_form_values = $ss->value
+                        $spek_form_values = ""
                     @endphp
-                @endforeach
+                @endif
+                
                 
                 @if($s->type == "number")
                     <div class="mb-5">
                         <label class="required form-label">{{ $s->pertanyaan }}</label>
                         <input type="{{ $s->type }}" name="{{ $s->id }}" class="form-control form-control-solid" autocomplete="off" value="@if(isset($spek_form_values)){{ $spek_form_values }}@endif" 
-                            @if(isset($spek_form_values))
+                            @if(!empty($spek_form_values))
                                 {{ 'disabled ' }}
                             @endif
                         required />
                     </div>
-                @endif
-                @if($s->type == "text")
+                @elseif($s->type == "text")
                     <div class="mb-5">
                         <label class="required form-label">{{ $s->pertanyaan }}</label>
-                        <textarea name="{{ $s->id }}" class="form-control form-control-solid" autocomplete="off" 
-                            @if(isset($spek_form_values))
+                        <textarea name="{{ $s->id }}" class="form-control form-control-solid" value="@if(isset($spek_form_values)){{ $spek_form_values }}@endif" autocomplete="off" 
+                            @if(!empty($spek_form_values))
                                 {{ 'disabled ' }}
                             @endif    
                         required>@if(isset($spek_form_values)){{ $spek_form_values }}@endif</textarea>
                     </div>
-                @endif
-                @if($s->type == "radio")
+                @elseif($s->type == "radio")
                     <div class="mb-5">
                         <label class="required form-label">{{ $s->pertanyaan }}</label>
                         @foreach($s->spek_sub_forms as $ss)
                         <label class="form-check form-check-custom form-check-solid mb-3">
                             <input class="form-check-input" type="{{ $s->type }}" name="{{ $s->id }}" value="{{ $ss->option }}"
-                                @if(isset($spek_form_values))
+                                @if(!empty($spek_form_values))
                                     {{ 'disabled ' }}
                                     @if($ss->option == $spek_form_values)
                                         {{ 'checked' }}
@@ -64,8 +68,7 @@
                         </label>
                         @endforeach
                     </div>
-                @endif
-                @if($s->type == "checkbox")
+                @elseif($s->type == "checkbox")
                     <div class="mb-5">
                         <label class="required form-label">{{ $s->pertanyaan }}</label>
                         @if(isset($spek_form_values))
@@ -76,7 +79,7 @@
                         @foreach($s->spek_sub_forms as $ss)
                         <label class="form-check form-check-custom form-check-solid mb-3">
                             <input class="form-check-input" type="{{ $s->type }}" name="{{ $s->id.'[]' }}" value="{{ $ss->option }}" 
-                                @if(isset($value_array))
+                                @if(!empty($value_array))
                                     {{ 'disabled ' }}
                                     @if(in_array($ss->option, $value_array))
                                         {{ 'checked' }}
