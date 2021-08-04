@@ -13,7 +13,7 @@
             <div class="card-body pt-0">
                 @foreach($form as $f)
                 <!--begin::Item-->
-                <div class="d-flex align-items-center bg-light-info rounded p-5">
+                <div class="d-flex align-items-center bg-light-info rounded p-5 mb-3">
                     <!--begin::Icon-->
                     <span class="svg-icon svg-icon-info me-5">
                         <!--begin::Svg Icon | path: icons/duotone/Home/Library.svg-->
@@ -31,13 +31,15 @@
                     <!--end::Icon-->
                     <!--begin::Title-->
                     <div class="flex-grow-1 me-2">
-                        <a href="#" class="fw-bolder text-gray-800 text-hover-primary fs-6">{{ $f->title }}</a>
+                        <a href="{{ route('dashboard.buat-form').'?id='.$f->id }}" class="fw-bolder text-gray-800 text-hover-primary fs-6">{{ $f->title }}</a>
                         <span class="text-muted fw-bold d-block">Valid Until {{ $f->valid_until }}</span>
                     </div>
                     <!--end::Title-->
                     <!--begin::Lable-->
-                    <a href="#" class="btn btn-sm btn-info fw-bolder text-gray-200 py-1 me-3">Download</a>
-                    <a href="{{ route('dashboard.buat-form').'?id='.$f->id }}" class="btn btn-sm btn-secondary fw-bolder text-dark py-1">Edit</a>
+                    <form action="">
+                        <input type="date" name="valid_until" class="form-control me-2 mb-3">
+                        <input type="submit" class="btn btn-sm btn-info me-2" style="float:right" value="Update">
+                    </form>
                     <!--end::Lable-->
                 </div>
                 <!--end::Item-->

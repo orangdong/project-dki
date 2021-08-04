@@ -98,18 +98,21 @@
                     @if($s->type == "number")
                         <div class="mb-5">
                             <label class="required form-label">{{ $s->pertanyaan }}</label>
+                            <a href="{{ route('dashboard.hapus-spek-form').'?spek_form_id='.$s->id.'&form_id='.$form_id }}" class="badge badge-danger" style="float:right">x</a>
                             <input type="{{ $s->type }}" name="{{ $s->id }}" class="form-control form-control-solid" autocomplete="off" required />
                         </div>
                     @endif
                     @if($s->type == "text")
                         <div class="mb-5">
                             <label class="required form-label">{{ $s->pertanyaan }}</label>
+                            <a href="{{ route('dashboard.hapus-spek-form').'?spek_form_id='.$s->id.'&form_id='.$form_id }}" class="badge badge-danger" style="float:right">x</a>
                             <textarea name="{{ $s->id }}" class="form-control form-control-solid" autocomplete="off" required></textarea>
                         </div>
                     @endif
                     @if($s->type == "radio")
                         <div class="mb-5">
                             <label class="required form-label">{{ $s->pertanyaan }}</label>
+                            <a href="{{ route('dashboard.hapus-spek-form').'?spek_form_id='.$s->id.'&form_id='.$form_id }}" class="badge badge-danger" style="float:right">x</a>
                             @foreach($s->spek_sub_forms as $ss)
                             <label class="form-check form-check-custom form-check-solid mb-3">
                                 <input class="form-check-input" type="{{ $s->type }}" name="{{ $s->id }}"/>
@@ -123,6 +126,7 @@
                     @if($s->type == "checkbox")
                         <div class="mb-5">
                             <label class="required form-label">{{ $s->pertanyaan }}</label>
+                            <a href="{{ route('dashboard.hapus-spek-form').'?spek_form_id='.$s->id.'&form_id='.$form_id }}" class="badge badge-danger" style="float:right">x</a>
                             @foreach($s->spek_sub_forms as $ss)
                             <label class="form-check form-check-custom form-check-solid mb-3">
                                 <input class="form-check-input" type="{{ $s->type }}" name="{{ $s->id.'[]' }}"/>

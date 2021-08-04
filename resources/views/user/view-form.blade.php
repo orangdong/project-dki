@@ -6,64 +6,91 @@
     <!--begin::Header-->
     <div class="card-header border-0 pt-5">
         <h3 class="card-title align-items-start flex-column">
-            <span class="card-label fw-bolder fs-3 mb-1">{{ $form_title }}</span>
+            <span class="card-label fw-bolder fs-3 mb-1">{{ $form->title }}</span>
         </h3>
     </div>
     <!--end::Header-->
     <!--begin::Body-->
     <div class="card-body py-3">
+        <div class="alert alert-info mt-n5 mb-10">
+            <p class="fw-bolder text-gray-800 fs-6">Deskripsi</p>
+            {{ $form->description }}</div>
             @foreach($spek_form as $s)
-            @foreach($form_value->where('spek_form_id',$s->id) as $ss) 
+                @if(isset($s->form_values[0]))
+                    @foreach($s->form_values as $ss)
+                        @php
+                            $spek_form_values = $ss->value
+                        @endphp
+                    @endforeach
+                @else
+                    @php
+                        $spek_form_values = ""
+                    @endphp
+                @endif
+                
+                
                 @if($s->type == "number")
                     <div class="mb-5">
                         <label class="required form-label">{{ $s->pertanyaan }}</label>
-                        <input type="{{ $s->type }}" name="{{ $s->id }}" class="form-control form-control-solid" autocomplete="off" value="{{ $ss->value }}" required />
+                        <input type="{{ $s->type }}" name="{{ $s->id }}" class="form-control form-control-solid" autocomplete="off" value="@if(isset($spek_form_values)){{ $spek_form_values }}@endif" 
+                            @if(!empty($spek_form_values))
+                                {{ 'disabled ' }}
+                            @endif
+                        required />
                     </div>
-                @endif
-                @if($s->type == "text")
+                @elseif($s->type == "text")
                     <div class="mb-5">
                         <label class="required form-label">{{ $s->pertanyaan }}</label>
-                        <textarea name="{{ $s->id }}" class="form-control form-control-solid" autocomplete="off" required>{{ $ss->value }}</textarea>
+                        <textarea name="{{ $s->id }}" class="form-control form-control-solid" value="@if(isset($spek_form_values)){{ $spek_form_values }}@endif" autocomplete="off" 
+                            @if(!empty($spek_form_values))
+                                {{ 'disabled ' }}
+                            @endif    
+                        required>@if(isset($spek_form_values)){{ $spek_form_values }}@endif</textarea>
                     </div>
-                @endif
-                @if($s->type == "radio")
+                @elseif($s->type == "radio")
                     <div class="mb-5">
                         <label class="required form-label">{{ $s->pertanyaan }}</label>
-                        @foreach($s->spek_sub_forms as $sss)
+                        @foreach($s->spek_sub_forms as $ss)
                         <label class="form-check form-check-custom form-check-solid mb-3">
-                            <input class="form-check-input" type="{{ $s->type }}" name="{{ $s->id }}" value="{{ $sss->option }}"
-                                @if($sss->option == $ss->value)
-                                    {{ 'checked' }}
+                            <input class="form-check-input" type="{{ $s->type }}" name="{{ $s->id }}" value="{{ $ss->option }}"
+                                @if(!empty($spek_form_values))
+                                    {{ 'disabled ' }}
+                                    @if($ss->option == $spek_form_values)
+                                        {{ 'checked' }}
+                                    @endif
                                 @endif
                             />
                             <span class="form-check-label">
-                                {{ $sss->option }}
+                                {{ $ss->option }}
+                            </span>
+                        </label>
+                        @endforeach
+                    </div>
+                @elseif($s->type == "checkbox")
+                    <div class="mb-5">
+                        <label class="required form-label">{{ $s->pertanyaan }}</label>
+                        @if(isset($spek_form_values))
+                            @php 
+                                $value_array = json_decode($spek_form_values)
+                            @endphp
+                        @endif
+                        @foreach($s->spek_sub_forms as $ss)
+                        <label class="form-check form-check-custom form-check-solid mb-3">
+                            <input class="form-check-input" type="{{ $s->type }}" name="{{ $s->id.'[]' }}" value="{{ $ss->option }}" 
+                                @if(!empty($value_array))
+                                    {{ 'disabled ' }}
+                                    @if(in_array($ss->option, $value_array))
+                                        {{ 'checked' }}
+                                    @endif
+                                @endif
+                            />
+                            <span class="form-check-label">
+                                {{ $ss->option }}
                             </span>
                         </label>
                         @endforeach
                     </div>
                 @endif
-                @if($s->type == "checkbox")
-                    <div class="mb-5">
-                        <label class="required form-label">{{ $s->pertanyaan }}</label>
-                        @php 
-                            $value_array = json_decode($ss->value)
-                        @endphp
-                        @foreach($s->spek_sub_forms as $sss)
-                        <label class="form-check form-check-custom form-check-solid mb-3">
-                            <input class="form-check-input" type="{{ $s->type }}" name="{{ $s->id.'[]' }}" value="{{ $sss->option }}" 
-                                @if(in_array($sss->option, $value_array))
-                                    {{ 'checked' }}
-                                @endif
-                            />
-                            <span class="form-check-label">
-                                {{ $sss->option }}
-                            </span>
-                        </label>
-                        @endforeach
-                    </div>
-                @endif
-            @endforeach
             @endforeach
     </div>
     <!--begin::Body-->

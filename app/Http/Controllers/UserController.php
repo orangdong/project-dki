@@ -29,7 +29,7 @@ class UserController extends Controller
             $jumlah_spek_form_diisi = FormValue::where([['user_id',$user->id],['form_id',$k->form_id]])->count(); //spek form yg diisi user ada brp
             // buatan admin lebih banyak dri yg diisi -> blom kelar ->unfinish
             // bautan admin <== yg diisi -> udah kelar ->history
-            if($jumlah_spek_form <= $jumlah_spek_form_diisi){
+            if($jumlah_spek_form <= $jumlah_spek_form_diisi && $jumlah_spek_form !== 0){
                 array_push($form_id_history, $k->form_id);
             }else{
                 array_push($form_id_unfinish, $k->form_id);

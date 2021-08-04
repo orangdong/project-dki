@@ -197,6 +197,10 @@ class AdminController extends Controller
         $form_id = $request->input('form_id');
         FormTujuan::where('form_id',$form_id)->delete();
         $tujuan = $request->input('tujuan');
+
+        if(empty($tujuan)){
+            return redirect(route('dashboard.buat-form').'?id='.$form_id);
+        }
         
         foreach($tujuan as $t){
             FormTujuan::create([
@@ -204,6 +208,15 @@ class AdminController extends Controller
                 'unit_tujuan' => $t
             ]);
         }
+
+        return redirect(route('dashboard.buat-form').'?id='.$form_id);
+    }
+
+    public function hapus_spek_form(Request $request){
+        $spek_form_id = $request->input('spek_form_id');
+        $form_id = $request->input('form_id');
+        SpekForm::whereid($spek_form_id)->delete();
+        SpekSubForm::where('spek_form_id', $spek_form_id)->delete();
 
         return redirect(route('dashboard.buat-form').'?id='.$form_id);
     }
