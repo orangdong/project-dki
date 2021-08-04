@@ -39,6 +39,8 @@ Route::prefix('dashboard')
             Route::post('spek-form-ganda', [AdminController::class, 'spek_form_ganda'])->name('dashboard.spek-form-ganda');
             Route::post('edit-tujuan-form', [AdminController::class, 'edit_tujuan_form'])->name('dashboard.edit-tujuan-form');
             Route::post('edit-code', [AdminController::class, 'edit_code'])->name('edit-code');
+            Route::post('user', [AdminController::class, 'edit_user'])->name('edit-user');
+            Route::post('change-user-password', [AdminController::class, 'change_user_password'])->name('change-user-password');
         });
 
         Route::middleware(['isUser'])->group(function(){

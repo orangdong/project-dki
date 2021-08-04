@@ -2,17 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Fortify\PasswordValidationRules;
 use App\Models\StaffCode;
 use App\Models\Form;
 use App\Models\SpekForm;
 use App\Models\SpekSubForm;
 use App\Models\FormTujuan;
+use App\Models\User;
 use App\Models\UserUnit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
+    use PasswordValidationRules;
+
     public function index(){
         $user = Auth::user();
         $form = Form::all();
@@ -22,6 +27,30 @@ class AdminController extends Controller
             'form' => $form,
             'title' => 'Dashboard'
         ]);
+    }
+
+    public function edit_user(Request $request){
+        $data = $request->all();
+        $user_id = $request->input('user_id');
+        $user = User::where('id', $user_id)->first();
+
+        $user->update($data);
+        return redirect(route('dashboard.user-management'));
+    }
+
+    public function change_user_password(Request $request){
+        $user = User::where('id', $request->input('user_id'));
+        $request->validate([
+            'password' => $this->passwordRules()
+        ]);
+
+        $update = [
+            'password' => Hash::make($request->input('password'))
+        ];
+
+        $user->update($update);
+
+        return redirect(route('dashboard.user-management'));
     }
 
     public function export(){
@@ -34,9 +63,14 @@ class AdminController extends Controller
 
     public function user(){
         $user = Auth::user();
+        $all = User::all();
+        $units = UserUnit::all();
+
         return view('admin.user', [
             'user' => $user,
-            'title' => 'User Management'
+            'title' => 'User Management',
+            'users' => $all,
+            'units' => $units
         ]);
     }
 
