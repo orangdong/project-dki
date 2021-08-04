@@ -18,18 +18,31 @@
             {{ $form->description }}</div>
         <form action="{{ route('dashboard.submit-form') }}" method="post">
             @csrf
-            @foreach($spek_forms as $s)
-              @foreach ($form_values->where('spek_form_id', $s->id) as $user_value)
+            @foreach($spek_form as $s)
+                @foreach($s->form_values as $ss)
+                    @php
+                        $spek_form_values = $ss->value
+                    @endphp
+                @endforeach
+                
                 @if($s->type == "number")
                     <div class="mb-5">
                         <label class="required form-label">{{ $s->pertanyaan }}</label>
-                        <input type="{{ $s->type }}" name="{{ $s->id }}" class="form-control form-control-solid" autocomplete="off" value="{{ $user_value->value }}" required />
+                        <input type="{{ $s->type }}" name="{{ $s->id }}" class="form-control form-control-solid" autocomplete="off" value="@if(isset($spek_form_values)){{ $spek_form_values }}@endif" 
+                            @if(isset($spek_form_values))
+                                {{ 'disabled ' }}
+                            @endif
+                        required />
                     </div>
                 @endif
                 @if($s->type == "text")
                     <div class="mb-5">
                         <label class="required form-label">{{ $s->pertanyaan }}</label>
-                        <textarea name="{{ $s->id }}" class="form-control form-control-solid" autocomplete="off" required>{{ $user_value->value }}</textarea>
+                        <textarea name="{{ $s->id }}" class="form-control form-control-solid" autocomplete="off" 
+                            @if(isset($spek_form_values))
+                                {{ 'disabled ' }}
+                            @endif    
+                        required>@if(isset($spek_form_values)){{ $spek_form_values }}@endif</textarea>
                     </div>
                 @endif
                 @if($s->type == "radio")
@@ -38,8 +51,11 @@
                         @foreach($s->spek_sub_forms as $ss)
                         <label class="form-check form-check-custom form-check-solid mb-3">
                             <input class="form-check-input" type="{{ $s->type }}" name="{{ $s->id }}" value="{{ $ss->option }}"
-                                @if($ss->option == $user_value->value)
-                                    {{ 'checked' }}
+                                @if(isset($spek_form_values))
+                                    {{ 'disabled ' }}
+                                    @if($ss->option == $spek_form_values)
+                                        {{ 'checked' }}
+                                    @endif
                                 @endif
                             />
                             <span class="form-check-label">
@@ -52,14 +68,19 @@
                 @if($s->type == "checkbox")
                     <div class="mb-5">
                         <label class="required form-label">{{ $s->pertanyaan }}</label>
-                        @php 
-                            $value_array = json_decode($user_value->value)
-                        @endphp
+                        @if(isset($spek_form_values))
+                            @php 
+                                $value_array = json_decode($spek_form_values)
+                            @endphp
+                        @endif
                         @foreach($s->spek_sub_forms as $ss)
                         <label class="form-check form-check-custom form-check-solid mb-3">
                             <input class="form-check-input" type="{{ $s->type }}" name="{{ $s->id.'[]' }}" value="{{ $ss->option }}" 
-                                @if(in_array($ss->option, $value_array))
-                                    {{ 'checked' }}
+                                @if(isset($value_array))
+                                    {{ 'disabled ' }}
+                                    @if(in_array($ss->option, $value_array))
+                                        {{ 'checked' }}
+                                    @endif
                                 @endif
                             />
                             <span class="form-check-label">
@@ -69,7 +90,6 @@
                         @endforeach
                     </div>
                 @endif
-                @endforeach  
             @endforeach
             <div class="mb-5">
                 <input type="hidden" name="form_id" value="{{ $form->id }}"/>

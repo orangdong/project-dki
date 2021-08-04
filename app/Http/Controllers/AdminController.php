@@ -55,8 +55,11 @@ class AdminController extends Controller
 
     public function export(){
         $user = Auth::user();
+        $spek_form = SpekForm::with('form')->get();
+        
         return view('admin.export', [
             'user' => $user,
+            'spek_form' => $spek_form,
             'title' => 'Export'
         ]);
     }
@@ -203,5 +206,10 @@ class AdminController extends Controller
         }
 
         return redirect(route('dashboard.buat-form').'?id='.$form_id);
+    }
+
+    public function submit_export(Request $request){
+        $user = Auth::user();
+        $spek_form_id = $request->input('spek_form_id');
     }
 }

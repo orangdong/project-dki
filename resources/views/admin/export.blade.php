@@ -14,18 +14,25 @@
                         <th>No</th>
                         <th>Form</th>
                         <th>Pertanyaan</th>
-                        <th>Tipe</th>
+                        <th>Data</th>
                         <th>Pilih</th>
                     </tr>
                 </thead>
                 <tbody>
+                    @php
+                        $no = 1
+                    @endphp
+                    @foreach($spek_form as $s)
                     <tr>
-                        <td>1</td>
-                        <td>Survey Kemampuan Teknologi</td>
-                        <td>Seberapa yakin Anda dengan kemampuan Anda?</td>
-                        <th>Angka</th>
-                        <td><input type="checkbox" name="id_spek_form[]" value="69"/></td>
+                        <td>
+                            {{ $no++ }}
+                        </td>
+                        <td>{{ $s->form->title }}</td>
+                        <td>{{ $s->pertanyaan }}</td>
+                        <th>{{ $s->type }}</th>
+                        <td><input type="checkbox" name="spek_form_id[]" value="{{ $s->id }}"/></td>
                     </tr>
+                    @endforeach
                 </tbody>
                 <tfoot>
 

@@ -31,4 +31,8 @@ class SpekForm extends Model
         return $this->hasMany(FormValue::class);
     }
 
+    public function form(){
+        return $this->belongsTo(Form::class);
+    }
+
 }
