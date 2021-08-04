@@ -38,7 +38,6 @@
                     </div>
                     <!--end::Title-->
                     <!--begin::Lable-->
-                    <a href="#" class="btn btn-sm btn-info fw-bolder text-gray-200 py-1 me-3">Download</a>
                     <a href="{{ route('dashboard.edit-form').'?id='.$fo->id }}" class="btn btn-sm btn-secondary fw-bolder text-dark py-1">Edit</a>
                     <!--end::Lable-->
                 </div>

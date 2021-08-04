@@ -31,7 +31,4 @@ class SpekForm extends Model
         return $this->hasMany(FormValue::class);
     }
 
-    public function user_value(){
-        return $this->hasMany(FormValue::class)->where('user_id',Auth::user()->id);
-    }
 }

@@ -181,11 +181,15 @@ class UserController extends Controller
             return redirect(route('dashboard.admin'));
         }
         
-        $form = Form::whereid($form_id)->with('spek_forms.user_value','spek_forms.spek_sub_forms')->first();
-        //return $form;
+        $form = Form::whereid($form_id)->first();
+
+        $spek_forms = SpekForm::where('form_id', $form_id)->with('spek_sub_forms')->get();
+        $form_values = FormValue::where('user_id', $user->id)->get();
+        // return $form;
         return view('user.edit-form', [
             'user' => $user,
-            'form_id' => $form_id,
+            'spek_forms' => $spek_forms,
+            'form_values' => $form_values,
             'form' => $form,
             'title' => 'View Form'
         ]);
