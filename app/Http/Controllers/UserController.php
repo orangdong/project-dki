@@ -112,7 +112,6 @@ class UserController extends Controller
         $form_id = $request->input('id');
         $form = Form::whereid($form_id)->first();
         $spek_form = SpekForm::where('form_id',$form_id)->with('spek_sub_forms')->get();
-        $user_unit = UserUnit::all();
         if(!$form_id){
             return redirect(route('dashboard.admin'));
         }
@@ -121,7 +120,6 @@ class UserController extends Controller
             'form_id' => $form_id,
             'form_title' => $form->title,
             'spek_form' => $spek_form,
-            'user_unit' => $user_unit,
             'title' => 'Isi Form'
         ]);
     }
@@ -129,6 +127,7 @@ class UserController extends Controller
     public function submit_form(Request $request){
         $user = Auth::user();
         $form_id = $request->input('form_id');
+        FormValue::where([['form_id',$form_id],['user_id',$user->id]])->delete();
         $spek_form = SpekForm::where('form_id',$form_id)->get();
         foreach($spek_form as $s){
             $spek_form_id = $s->id; // dari belakang, merepresentasikan NAME html
@@ -144,5 +143,51 @@ class UserController extends Controller
             ]);
         }
         return redirect(route('dashboard.admin'));
+    }
+
+    public function view_form(Request $request){
+        $user = Auth::user();
+        $form_id = $request->input('id');
+        $form = Form::whereid($form_id)->first();
+        $spek_form = SpekForm::where('form_id',$form_id)->with('spek_sub_forms')->get();
+        $form_value = FormValue::where([['form_id',$form_id],['user_id',$user->id]])->get();
+        if(!$form_id){
+            return redirect(route('dashboard.admin'));
+        }
+        return view('user.view-form', [
+            'user' => $user,
+            'form_id' => $form_id,
+            'form_title' => $form->title,
+            'spek_form' => $spek_form,
+            'form_value' => $form_value,
+            'title' => 'View Form'
+        ]);
+    }
+
+    public function edit_form(Request $request){
+        $user = Auth::user();
+        $form_id = $request->input('id');
+
+        if(!$form_id){
+            return redirect(route('dashboard.admin'));
+        }
+
+        $jumlah_spek_form = SpekForm::where('form_id',$form_id)->count(); //spek form yg dibuat admin ada brp
+        $jumlah_spek_form_diisi = FormValue::where([['user_id',$user->id],['form_id',$form_id]])->count(); //spek form yg diisi user ada brp
+        // buatan admin lebih banyak dri yg diisi -> blom kelar ->boleh diedit
+        // bautan admin <== yg diisi -> udah kelar ->history
+
+        if($jumlah_spek_form <= $jumlah_spek_form_diisi){
+            return redirect(route('dashboard.admin'));
+        }
+        
+        $form = Form::whereid($form_id)->with('spek_forms.user_value','spek_forms.spek_sub_forms')->first();
+        //return $form;
+        return view('user.edit-form', [
+            'user' => $user,
+            'form_id' => $form_id,
+            'form' => $form,
+            'title' => 'View Form'
+        ]);
     }
 }

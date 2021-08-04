@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class SpekForm extends Model
 {
@@ -28,5 +29,9 @@ class SpekForm extends Model
 
     public function form_values(){
         return $this->hasMany(FormValue::class);
+    }
+
+    public function user_value(){
+        return $this->hasMany(FormValue::class)->where('user_id',Auth::user()->id);
     }
 }

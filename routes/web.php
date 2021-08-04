@@ -45,6 +45,8 @@ Route::prefix('dashboard')
             Route::get('/', [UserController::class, 'index'])->name('dashboard.user');
             Route::get('isi-form', [UserController::class, 'isi_form'])->name('dashboard.isi-form');
             Route::post('submit-form', [UserController::class, 'submit_form'])->name('dashboard.submit-form');
+            Route::get('view-form', [UserController::class, 'view_form'])->name('dashboard.view-form');
+            Route::get('edit-form', [UserController::class, 'edit_form'])->name('dashboard.edit-form');
         });
         
     });
