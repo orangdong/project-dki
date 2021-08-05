@@ -6,10 +6,15 @@
 
 
 <div class="card">
+    <label style="font-size: 22px; font-weight: 600" class="form-label mt-5 ms-5">Form Export</label>
+    <p class="text-muted mb-4 mt-n1 ms-6">{{\Carbon\Carbon::now('Asia/Jakarta')}}</p>
     <div class="card-body">
         @foreach($export_form as $e)
             @if($e->spek_form->type == "text")
-                <label class="form-label required">{{ $e->spek_form->pertanyaan }}</label>
+                <label style="font-size: 18px; font-weight: 500" class="form-label required mb-4">{{ $e->spek_form->pertanyaan }}</label>
+                <div class="table-responsive">
+
+                
                 <table class="table table-striped table-row-bordered">
                     <thead>
                         <tr>
@@ -33,8 +38,12 @@
                         @endforeach
                     </tbody>
                 </table>
+            </div>
             @elseif($e->spek_form->type == "number")
-                <label class="form-label required">{{ $e->spek_form->pertanyaan }}</label>
+                <label style="font-size: 18px; font-weight: 500" class="form-label required mb-4">{{ $e->spek_form->pertanyaan }}</label>
+                <div class="table-responsive">
+
+                
                 <table class="table table-striped table-row-bordered">
                     <thead>
                         <tr>
@@ -46,11 +55,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @php 
+                        {{-- @php 
                             $no=1
                             $num_of_elements = count($arr)
                             $variance = 0.0 
-                        @endphp
+                        @endphp --}}
                         @foreach($e->spek_form->form_values as $esf)
                         <tr>
                             <td>{{ $no++ }}</td>
@@ -59,7 +68,7 @@
                             <td>{{ $esf->user->email }}</td>
                             <td>{{ $esf->value }}</td>
                         </tr>
-                            @php
+                            {{-- @php
                             
                                 
                                     // calculating mean using array_sum() method
@@ -71,7 +80,7 @@
                                             // all numbers and means.
                                 $variance += pow(($i - $average), 2);
                             }
-                            @endphp
+                            @endphp --}}
                         @endforeach
                     </tbody>
                     <tfoot>
@@ -85,7 +94,7 @@
                         </tr>
                     </tfoot>
                 </table>
-
+            </div>
             @elseif($e->spek_form->type == "radio" && $e->spek_form->data == "text")
                 @php $jumlah = [] @endphp
                 @foreach($e->spek_form->spek_sub_forms as $ess)
@@ -93,7 +102,8 @@
                     array_push($jumlah, App\Models\FormValue::where('value',$ess->option)->count())
                     @endphp
                 @endforeach
-                            <div id="kt_amcharts_{{ $e->spek_form->pertanyaan }}" style="height: 500px;"></div>
+                <label style="font-size: 18px; font-weight: 500" class="form-label required mb-4">{{ $e->spek_form->pertanyaan }}</label>
+                            <div id="kt_amcharts_{{ $e->spek_form->pertanyaan }}" style="height: 300px;" class="mb-5"></div>
                                 <script>
                                 am4core.ready(function () {
 
@@ -203,7 +213,8 @@
                             array_push($jumlah, App\Models\FormValue::where('value',$ess->option)->count())
                             @endphp
                         @endforeach
-                            <div id="kt_amcharts_{{ $e->spek_form->pertanyaan }}" style="height: 500px;"></div>
+                        <label style="font-size: 18px; font-weight: 500" class="form-label required mb-4">{{ $e->spek_form->pertanyaan }}</label>
+                            <div id="kt_amcharts_{{ $e->spek_form->pertanyaan }}" style="height: 300px;" class="mb-5"></div>
                                 <script>
                                 am4core.ready(function () {
 
@@ -335,7 +346,8 @@
                         $i++;
                         ?>
                     @endforeach
-                            <div id="kt_amcharts_{{ $e->spek_form->pertanyaan }}" style="height: 500px;"></div>
+                    <label style="font-size: 18px; font-weight: 500" class="form-label required mb-4">{{ $e->spek_form->pertanyaan }}</label>
+                            <div id="kt_amcharts_{{ $e->spek_form->pertanyaan }}" style="height: 300px;" class="mb-5"></div>
                                 <script>
                                 am4core.ready(function () {
 
