@@ -17,4 +17,8 @@ class FormValue extends Model
     protected $fillable = [
         'user_id', 'form_id','spek_form_id', 'value'
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

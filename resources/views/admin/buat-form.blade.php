@@ -188,7 +188,7 @@ function jumlahopsi(that){
         x = x +
             "<div class=\"mb-5\">" +
             "<label class=\"required form-label\">Untuk Opsi " + i + "</label><br>" +
-            "<input type=\"text\" class=\"form-control form-control-solid mb-5\" name=\"opsi[]\" placeholder=\"Opsi " + i + "\" required>" +
+            "<input type=\"text\" autocomplete=\"off\" class=\"form-control form-control-solid mb-5\" name=\"opsi[]\" placeholder=\"Opsi " + i + "\" required>" +
             "</div>"
         ;
     }

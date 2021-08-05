@@ -7,7 +7,8 @@
 <!-- begin::Card -->
 <div class="card card-xl-stretch mb-xl-8">
     <div class="card-body">
-        <form action="" method="post">
+        <form action="{{ route('submit-export') }}" method="post">
+            @csrf
             <table id="export" class="table table-striped table-row-bordered gy-5 gs-7 border rounded">
                 <thead>
                     <tr class="fw-bolder fs-6 text-gray-800 px-7">
@@ -30,7 +31,12 @@
                         <td>{{ $s->form->title }}</td>
                         <td>{{ $s->pertanyaan }}</td>
                         <th>{{ $s->type }}</th>
-                        <td><input type="checkbox" name="spek_form_id[]" value="{{ $s->id }}"/></td>
+                        <td>
+                            <label class="form-check form-check-custom form-check-solid mb-3">
+                                <input class="form-check-input" type="checkbox" name="spek_form_id[]" value="{{ $s->id }}"/>
+                                <span class="form-check-label"></span>
+                            </label>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -38,7 +44,7 @@
 
                 </tfoot>
             </table>
-            <a class="btn btn-sm btn-success" type="submit">Export</a>
+            <input class="btn btn-sm btn-success" type="submit" value="Insert"/>
         </form>
     </div>
 </div>

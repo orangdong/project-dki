@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
             'nip' => '12345678',
             'surat' => 'keterangan.pdf',
             'jabatan' => 'Kepala Bidang',
-            'unit' => 'kesehatan'
+            'unit' => 'Kesehatan'
         ]);
 
         StaffCode::create([
