@@ -16,7 +16,6 @@
 		<link href="{{ asset('css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
 		<link rel="icon" href="{{ asset('media/logos/main-logo.svg') }}" type="image">
 		<!--end::Global Stylesheets Bundle-->
-        <script type="text/javascript" src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
 	</head>
 	<!--end::Head-->
 	<!--begin::Body-->
@@ -127,10 +126,12 @@
 		<!--begin::Javascript-->
 		<!--begin::Global Javascript Bundle(used by all pages)-->
 		<script src="{{ asset('plugins/global/plugins.bundle.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
 		<script src="{{ asset('js/scripts.bundle.js') }}"></script>
 		<!--end::Global Javascript Bundle-->
 		<!--begin::Page Custom Javascript(used by this page)-->
 		<script src="{{ asset('js/custom/widgets.js') }}"></script>
+		
 		<!--end::Page Custom Javascript-->
 
 		<!--begin::Toastr-->

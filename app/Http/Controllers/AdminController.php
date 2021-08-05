@@ -236,10 +236,13 @@ class AdminController extends Controller
         $spek_form_id = $request->input('spek_form_id');
 
         foreach($spek_form_id as $s){
-            ExportForm::create([
-                'user_id' => $user->id,
-                'spek_form_id' => $s
-            ]);
+            $ada_export = ExportForm::where([['spek_form_id',$s],['user_id',$user->id]])->count();
+            if($ada_export < 1){
+                ExportForm::create([
+                    'user_id' => $user->id,
+                    'spek_form_id' => $s
+                ]);
+            }
         }
 
         return redirect(route('view-export'))->with('success','Pemilihan sukses');
@@ -254,7 +257,7 @@ class AdminController extends Controller
 
     public function view_export(){
         $user = Auth::user();
-        $export_form = ExportForm::where('user_id',$user->id)->with('spek_form.form_values')->get();
+        $export_form = ExportForm::where('user_id',$user->id)->with('spek_form.spek_sub_forms','spek_form.form_values.user')->get();
 
         return view('admin.view-export',[
             'export_form' => $export_form,
@@ -264,7 +267,7 @@ class AdminController extends Controller
 
     public function download_export(){
         $user = Auth::user();
-        $export_form = ExportForm::where('user_id',$user->id)->with('spek_form.form_values')->get();
+        $export_form = ExportForm::where('user_id',$user->id)->with('spek_form.form_values.user')->get();
 
         return view('admin.download-export',[
             'export_form' => $export_form,

@@ -15,7 +15,7 @@ class CreateFormValuesTable extends Migration
     {
         Schema::create('form_values', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->integer('form_id');
             $table->foreignId('spek_form_id')->constrained('spek_forms')->onDelete('cascade');
             $table->longText('value')->nullable();
