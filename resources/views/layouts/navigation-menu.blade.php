@@ -36,10 +36,49 @@
 													<span class="menu-title">User</span>
 												</a>
 											</div>
-											<div class="menu-item {{request()->routeIs('dashboard.export*') ? 'show' : ''}} me-lg-1">
-												<a class="menu-link py-3" href="{{ route('dashboard.export') }}">
+											<div data-kt-menu-trigger="click" data-kt-menu-placement="bottom-start" class="menu-item {{request()->routeIs('dashboard.export*') ? 'show' : ''}} menu-lg-down-accordion me-lg-1">
+												<span class="menu-link py-3">
 													<span class="menu-title">Export</span>
-												</a>
+													<span class="menu-arrow d-lg-none"></span>
+												</span>
+												<div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px">
+													<div class="menu-item">
+														<a class="menu-link py-3" href="{{ route('dashboard.export') }}">
+															<span class="menu-icon">
+																<!--begin::Svg Icon | path: icons/duotone/Interface/Settings-02.svg-->
+																<span class="svg-icon svg-icon-2">
+																	<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+																		<path opacity="0.25" d="M2 6.5C2 4.01472 4.01472 2 6.5 2H17.5C19.9853 2 22 4.01472 22 6.5V6.5C22 8.98528 19.9853 11 17.5 11H6.5C4.01472 11 2 8.98528 2 6.5V6.5Z" fill="#12131A" />
+																		<path d="M20 6.5C20 7.88071 18.8807 9 17.5 9C16.1193 9 15 7.88071 15 6.5C15 5.11929 16.1193 4 17.5 4C18.8807 4 20 5.11929 20 6.5Z" fill="#12131A" />
+																		<path opacity="0.25" d="M2 17.5C2 15.0147 4.01472 13 6.5 13H17.5C19.9853 13 22 15.0147 22 17.5V17.5C22 19.9853 19.9853 22 17.5 22H6.5C4.01472 22 2 19.9853 2 17.5V17.5Z" fill="#12131A" />
+																		<path d="M9 17.5C9 18.8807 7.88071 20 6.5 20C5.11929 20 4 18.8807 4 17.5C4 16.1193 5.11929 15 6.5 15C7.88071 15 9 16.1193 9 17.5Z" fill="#12131A" />
+																	</svg>
+																</span>
+																<!--end::Svg Icon-->
+															</span>
+															<span class="menu-title">Insert</span>
+														</a>
+													</div>
+													<div class="menu-item">
+														<a class="menu-link py-3" href="{{ route('view-export') }}">
+															<span class="menu-icon">
+																<!--begin::Svg Icon | path: icons/duotone/Files/File.svg-->
+																<span class="svg-icon svg-icon-2">
+																	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+																		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+																			<polygon points="0 0 24 0 24 24 0 24" />
+																			<path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+																			<rect fill="#000000" x="6" y="11" width="9" height="2" rx="1" />
+																			<rect fill="#000000" x="6" y="15" width="5" height="2" rx="1" />
+																		</g>
+																	</svg>
+																</span>
+																<!--end::Svg Icon-->
+															</span>
+															<span class="menu-title">View</span>
+														</a>
+													</div>
+												</div>
 											</div>
 											<div class="menu-item {{request()->routeIs('dashboard.staff-code*') ? 'show' : ''}} me-lg-1">
 												<a class="menu-link py-3" href="{{ route('dashboard.staff-code') }}">

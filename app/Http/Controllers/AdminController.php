@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actions\Fortify\PasswordValidationRules;
+use App\Models\ExportForm;
 use App\Models\StaffCode;
 use App\Models\Form;
 use App\Models\SpekForm;
@@ -60,7 +61,7 @@ class AdminController extends Controller
         return view('admin.export', [
             'user' => $user,
             'spek_form' => $spek_form,
-            'title' => 'Export'
+            'title' => 'Export Insert'
         ]);
     }
 
@@ -232,5 +233,41 @@ class AdminController extends Controller
     public function submit_export(Request $request){
         $user = Auth::user();
         $spek_form_id = $request->input('spek_form_id');
+
+        foreach($spek_form_id as $s){
+            ExportForm::create([
+                'user_id' => $user->id,
+                'spek_form_id' => $s
+            ]);
+        }
+
+        return redirect(route('view-export'))->with('success','Pemilihan sukses');
+    }
+
+    public function clear_export(){
+        $user = Auth::user();
+        ExportForm::where('user_id',$user->id)->delete();
+
+        return redirect(route('view-export'))->with('success','Clear view berhasil');
+    }
+
+    public function view_export(){
+        $user = Auth::user();
+        $export_form = ExportForm::where('user_id',$user->id)->with('spek_form.form_values')->get();
+
+        return view('admin.view-export',[
+            'export_form' => $export_form,
+            'title' => 'Export View'
+        ]);
+    }
+
+    public function download_export(){
+        $user = Auth::user();
+        $export_form = ExportForm::where('user_id',$user->id)->with('spek_form.form_values')->get();
+
+        return view('admin.download-export',[
+            'export_form' => $export_form,
+            'title' => 'Export'
+        ]);
     }
 }

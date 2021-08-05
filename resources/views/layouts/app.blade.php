@@ -58,7 +58,7 @@
 								<div class="d-flex align-items-center py-1">
 									<!--begin::Wrapper-->
 									<div class="me-4">
-										<a class="btn btn-sm btn-flex btn-primary btn-active-secondary fw-bolder" href="#">Action</a>
+										@yield('isi_action')
 									</div>
 									<!--end::Wrapper-->
 								</div>

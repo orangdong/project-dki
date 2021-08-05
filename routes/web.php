@@ -45,6 +45,8 @@ Route::prefix('dashboard')
             Route::post('change-user-password', [AdminController::class, 'change_user_password'])->name('change-user-password');
             Route::post('submit-export', [AdminController::class, 'submit_export'])->name('submit-export');
             Route::get('view-export', [AdminController::class, 'view_export'])->name('view-export');
+            Route::get('clear-export', [AdminController::class, 'clear_export'])->name('clear-export');
+            Route::get('download-export', [AdminController::class, 'download_export'])->name('download-export');
         });
 
         Route::middleware(['isUser'])->group(function(){
