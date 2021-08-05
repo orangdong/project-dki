@@ -11,6 +11,7 @@ use App\Models\SpekSubForm;
 use App\Models\FormTujuan;
 use App\Models\User;
 use App\Models\UserUnit;
+use PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -267,11 +268,10 @@ class AdminController extends Controller
 
     public function download_export(){
         $user = Auth::user();
-        $export_form = ExportForm::where('user_id',$user->id)->with('spek_form.form_values.user')->get();
-
-        return view('admin.download-export',[
-            'export_form' => $export_form,
-            'title' => 'Export'
-        ]);
+        $export_form = ExportForm::where('user_id',$user->id)->with('spek_form.spek_sub_forms','spek_form.form_values.user')->get();
+        return view('admin.download-export',['export_form'=>$export_form]);
+        //$pdf = PDF::loadView('admin.download-export',['export_form'=>$export_form])->setOptions(['defaultFont' => url('storage/fonts/poppins_300_ea8381d11630c33f2ab271919542aa73.ufm')]);
+        //return $pdf->download('export-form.pdf');
     }
+
 }

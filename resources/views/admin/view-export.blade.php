@@ -11,7 +11,7 @@
     <div class="card-body">
         @foreach($export_form as $e)
             @if($e->spek_form->type == "text")
-                <label style="font-size: 18px; font-weight: 500" class="form-label required mb-4">{{ $e->spek_form->pertanyaan }}</label>
+                <label style="font-size: 18px; font-weight: 500" class="form-label mb-4">{{ $e->spek_form->pertanyaan }}</label>
                 <div class="table-responsive">
 
                 
@@ -40,7 +40,7 @@
                 </table>
             </div>
             @elseif($e->spek_form->type == "number")
-                <label style="font-size: 18px; font-weight: 500" class="form-label required mb-4">{{ $e->spek_form->pertanyaan }}</label>
+                <label style="font-size: 18px; font-weight: 500" class="form-label mb-4">{{ $e->spek_form->pertanyaan }}</label>
                 <div class="table-responsive">
 
                 
@@ -55,11 +55,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @php 
+                         @php 
                             $no=1
-                            $num_of_elements = count($arr)
-                            $variance = 0.0 
-                        @endphp --}}
+                        @endphp 
                         @foreach($e->spek_form->form_values as $esf)
                         <tr>
                             <td>{{ $no++ }}</td>
@@ -68,31 +66,8 @@
                             <td>{{ $esf->user->email }}</td>
                             <td>{{ $esf->value }}</td>
                         </tr>
-                            {{-- @php
-                            
-                                
-                                    // calculating mean using array_sum() method
-                            $average = array_sum($arr)/$num_of_elements;
-                                
-                            foreach($arr as $i)
-                            {
-                                // sum of squares of differences between 
-                                            // all numbers and means.
-                                $variance += pow(($i - $average), 2);
-                            }
-                            @endphp --}}
                         @endforeach
                     </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colspan="4">Average</td>
-                            <td>{{ $average }}</td>
-                        </tr>
-                        <tr>
-                            <td colspan="4">Standard Deviation</td>
-                            <td>{{ $std }}</td>
-                        </tr>
-                    </tfoot>
                 </table>
             </div>
             @elseif($e->spek_form->type == "radio" && $e->spek_form->data == "text")
@@ -102,8 +77,49 @@
                     array_push($jumlah, App\Models\FormValue::where('value',$ess->option)->count())
                     @endphp
                 @endforeach
-                <label style="font-size: 18px; font-weight: 500" class="form-label required mb-4">{{ $e->spek_form->pertanyaan }}</label>
-                            <div id="kt_amcharts_{{ $e->spek_form->pertanyaan }}" style="height: 300px;" class="mb-5"></div>
+                <label style="font-size: 18px; font-weight: 500" class="form-label mb-4">{{ $e->spek_form->pertanyaan }}</label>
+
+                            <div id="kt_amcharts_pie{{ $e->spek_form->pertanyaan }}" style="height: 300px;"></div>
+                            <script>
+                                am4core.ready(function () {
+                                    // Themes begin
+                                    //am4core.useTheme(am4themes_dataviz);
+                                    am4core.useTheme(am4themes_animated);
+                                    // Themes end
+
+                                    // Create chart
+                                    chart = am4core.create('kt_amcharts_pie{{ $e->spek_form->pertanyaan }}', am4charts.PieChart);
+                                    chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+
+                                    chart.data = [
+                                    @php $i=0 @endphp
+                                    @foreach($e->spek_form->spek_sub_forms as $ess) // putaran
+                                        
+                                        {!! 
+                                            "{".
+                                                "country: '".$ess->option."',
+                                                value: ".$jumlah[$i++].
+                                            "},"
+                                        !!}
+                                        
+                                    @endforeach
+                                    ];
+
+                                    var series = chart.series.push(new am4charts.PieSeries());
+                                    series.dataFields.value = 'value';
+                                    series.dataFields.radiusValue = 'value';
+                                    series.dataFields.category = 'country';
+                                    series.slices.template.cornerRadius = 6;
+                                    series.colors.step = 3;
+
+                                    series.hiddenState.properties.endAngle = -90;
+
+                                    chart.legend = new am4charts.Legend();
+
+                                    }); // end am4core.ready()
+                            </script>
+        
+                            <div id="kt_amcharts_{{ $e->spek_form->id }}" style="height: 300px;" class="mb-5"></div>
                                 <script>
                                 am4core.ready(function () {
 
@@ -111,7 +127,7 @@
                                 am4core.useTheme(am4themes_animated);
                                 // Themes end
 
-                                var chart = am4core.create('kt_amcharts_{{ $e->spek_form->pertanyaan }}', am4charts.XYChart)
+                                var chart = am4core.create('kt_amcharts_{{ $e->spek_form->id }}', am4charts.XYChart)
                                 chart.colors.step = 2;
 
                                 chart.legend = new am4charts.Legend()
@@ -213,8 +229,50 @@
                             array_push($jumlah, App\Models\FormValue::where('value',$ess->option)->count())
                             @endphp
                         @endforeach
-                        <label style="font-size: 18px; font-weight: 500" class="form-label required mb-4">{{ $e->spek_form->pertanyaan }}</label>
-                            <div id="kt_amcharts_{{ $e->spek_form->pertanyaan }}" style="height: 300px;" class="mb-5"></div>
+                        <label style="font-size: 18px; font-weight: 500" class="form-label mb-4">{{ $e->spek_form->pertanyaan }}</label>
+                            
+                            <div id="kt_amcharts_pie{{ $e->spek_form->id }}" style="height: 300px;"></div>
+                            <script>
+                                am4core.ready(function () {
+                                    // Themes begin
+                                    //am4core.useTheme(am4themes_dataviz);
+                                    am4core.useTheme(am4themes_animated);
+                                    // Themes end
+
+                                    // Create chart
+                                    chart = am4core.create('kt_amcharts_pie{{ $e->spek_form->id }}', am4charts.PieChart);
+                                    chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+
+                                    chart.data = [
+                                    @php $ii=0 @endphp
+                                    @foreach($e->spek_form->spek_sub_forms as $ess) // putaran
+                                        
+                                        {!! 
+                                            "{".
+                                                "country: '".$ess->option."',
+                                                value: ".$jumlah[$ii++].
+                                            "},"
+                                        !!}
+                                        
+                                    @endforeach
+                                    ];
+
+                                    var series = chart.series.push(new am4charts.PieSeries());
+                                    series.dataFields.value = 'value';
+                                    series.dataFields.radiusValue = 'value';
+                                    series.dataFields.category = 'country';
+                                    series.slices.template.cornerRadius = 6;
+                                    series.colors.step = 3;
+
+                                    series.hiddenState.properties.endAngle = -90;
+
+                                    chart.legend = new am4charts.Legend();
+
+                                    }); // end am4core.ready()
+                            </script>
+
+
+                            <div id="kt_amcharts_{{ $e->spek_form->id }}" style="height: 300px;" class="mb-5"></div>
                                 <script>
                                 am4core.ready(function () {
 
@@ -222,7 +280,7 @@
                                 am4core.useTheme(am4themes_animated);
                                 // Themes end
 
-                                var chart = am4core.create('kt_amcharts_{{ $e->spek_form->pertanyaan }}', am4charts.XYChart)
+                                var chart = am4core.create('kt_amcharts_{{ $e->spek_form->id }}', am4charts.XYChart)
                                 chart.colors.step = 2;
 
                                 chart.legend = new am4charts.Legend()
@@ -315,6 +373,7 @@
 
                                 });
                                 </script>
+
             @elseif($e->spek_form->type == "checkbox" && $e->spek_form->data == "text")
                     @php $i=1 @endphp
                     @foreach($e->spek_form->spek_sub_forms as $ess)
@@ -346,8 +405,48 @@
                         $i++;
                         ?>
                     @endforeach
-                    <label style="font-size: 18px; font-weight: 500" class="form-label required mb-4">{{ $e->spek_form->pertanyaan }}</label>
-                            <div id="kt_amcharts_{{ $e->spek_form->pertanyaan }}" style="height: 300px;" class="mb-5"></div>
+                    <label style="font-size: 18px; font-weight: 500" class="form-label mb-4">{{ $e->spek_form->pertanyaan }}</label>
+                            <div id="kt_amcharts_pie{{ $e->spek_form->id }}" style="height: 300px;"></div>
+                            <script>
+                                am4core.ready(function () {
+                                    // Themes begin
+                                    //am4core.useTheme(am4themes_dataviz);
+                                    am4core.useTheme(am4themes_animated);
+                                    // Themes end
+
+                                    // Create chart
+                                    chart = am4core.create('kt_amcharts_pie{{ $e->spek_form->id }}', am4charts.PieChart);
+                                    chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+
+                                    chart.data = [
+                                    @php $ii=0 @endphp
+                                    @foreach($e->spek_form->spek_sub_forms as $ess) // putaran
+                                        
+                                        {!! 
+                                            "{".
+                                                "country: '".$ess->option."',
+                                                value: ".$jumlah[$ii++].
+                                            "},"
+                                        !!}
+                                        
+                                    @endforeach
+                                    ];
+
+                                    var series = chart.series.push(new am4charts.PieSeries());
+                                    series.dataFields.value = 'value';
+                                    series.dataFields.radiusValue = 'value';
+                                    series.dataFields.category = 'country';
+                                    series.slices.template.cornerRadius = 6;
+                                    series.colors.step = 3;
+
+                                    series.hiddenState.properties.endAngle = -90;
+
+                                    chart.legend = new am4charts.Legend();
+
+                                    }); // end am4core.ready()
+                            </script>
+                    
+                                <div id="kt_amcharts_{{ $e->spek_form->id }}" style="height: 300px;" class="mb-5"></div>
                                 <script>
                                 am4core.ready(function () {
 
@@ -355,7 +454,7 @@
                                 am4core.useTheme(am4themes_animated);
                                 // Themes end
 
-                                var chart = am4core.create('kt_amcharts_{{ $e->spek_form->pertanyaan }}', am4charts.XYChart)
+                                var chart = am4core.create('kt_amcharts_{{ $e->spek_form->id }}', am4charts.XYChart)
                                 chart.colors.step = 2;
 
                                 chart.legend = new am4charts.Legend()
@@ -450,7 +549,148 @@
                                 </script>
 
             @elseif($e->spek_form->type == "checkbox" && $e->spek_form->data == "number")
+                         <div id="kt_amcharts_pie{{ $e->spek_form->id }}" style="height: 300px;"></div>
+                            <script>
+                                am4core.ready(function () {
+                                    // Themes begin
+                                    //am4core.useTheme(am4themes_dataviz);
+                                    am4core.useTheme(am4themes_animated);
+                                    // Themes end
 
+                                    // Create chart
+                                    chart = am4core.create('kt_amcharts_pie{{ $e->spek_form->id }}', am4charts.PieChart);
+                                    chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+
+                                    chart.data = [
+                                    @php $ii=0 @endphp
+                                    @foreach($e->spek_form->spek_sub_forms as $ess) // putaran
+                                        
+                                        {!! 
+                                            "{".
+                                                "country: '".$ess->option."',
+                                                value: ".$jumlah[$ii++].
+                                            "},"
+                                        !!}
+                                        
+                                    @endforeach
+                                    ];
+
+                                    var series = chart.series.push(new am4charts.PieSeries());
+                                    series.dataFields.value = 'value';
+                                    series.dataFields.radiusValue = 'value';
+                                    series.dataFields.category = 'country';
+                                    series.slices.template.cornerRadius = 6;
+                                    series.colors.step = 3;
+
+                                    series.hiddenState.properties.endAngle = -90;
+
+                                    chart.legend = new am4charts.Legend();
+
+                                    }); // end am4core.ready()
+                            </script>
+
+
+                            <div id="kt_amcharts_{{ $e->spek_form->id }}" style="height: 300px;" class="mb-5"></div>
+                                <script>
+                                am4core.ready(function () {
+
+                                // Themes begin
+                                am4core.useTheme(am4themes_animated);
+                                // Themes end
+
+                                var chart = am4core.create('kt_amcharts_{{ $e->spek_form->id }}', am4charts.XYChart)
+                                chart.colors.step = 2;
+
+                                chart.legend = new am4charts.Legend()
+                                chart.legend.position = 'top'
+                                chart.legend.paddingBottom = 20
+                                chart.legend.labels.template.maxWidth = 95
+
+                                var xAxis = chart.xAxes.push(new am4charts.CategoryAxis())
+                                xAxis.dataFields.category = 'category'
+                                xAxis.renderer.cellStartLocation = 0.1
+                                xAxis.renderer.cellEndLocation = 0.9
+                                xAxis.renderer.grid.template.location = 0;
+
+                                var yAxis = chart.yAxes.push(new am4charts.ValueAxis());
+                                yAxis.min = 0;
+
+                                function createSeries(value, name) {
+                                    var series = chart.series.push(new am4charts.ColumnSeries())
+                                    series.dataFields.valueY = value
+                                    series.dataFields.categoryX = 'category'
+                                    series.name = name
+
+                                    series.events.on('hidden', arrangeColumns);
+                                    series.events.on('shown', arrangeColumns);
+
+                                    var bullet = series.bullets.push(new am4charts.LabelBullet())
+                                    bullet.interactionsEnabled = false
+                                    bullet.dy = 30;
+                                    bullet.label.text = '{valueY}'
+                                    bullet.label.fill = am4core.color('#ffffff')
+
+                                    return series;
+                                }
+
+                                chart.data = [
+                                    <?php $ii=0; ?>
+                                    @foreach($e->spek_form->spek_sub_forms as $ess) // putaran
+                                        
+                                        {!!   
+                                            "{".
+                                                "category: '".$ess->option."',
+                                                first: ".$jumlah[$ii++].
+                                            "},"
+                                        !!}
+                                        
+                                    @endforeach
+                                ]
+
+
+                                createSeries('first', '{{ $e->spek_form->pertanyaan }}');
+
+
+                                function arrangeColumns() {
+
+                                    var series = chart.series.getIndex(0);
+
+                                    var w = 1 - xAxis.renderer.cellStartLocation - (1 - xAxis.renderer.cellEndLocation);
+                                    if (series.dataItems.length > 1) {
+                                        var x0 = xAxis.getX(series.dataItems.getIndex(0), 'categoryX');
+                                        var x1 = xAxis.getX(series.dataItems.getIndex(1), 'categoryX');
+                                        var delta = ((x1 - x0) / chart.series.length) * w;
+                                        if (am4core.isNumber(delta)) {
+                                            var middle = chart.series.length / 2;
+
+                                            var newIndex = 0;
+                                            chart.series.each(function (series) {
+                                                if (!series.isHidden && !series.isHiding) {
+                                                    series.dummyData = newIndex;
+                                                    newIndex++;
+                                                }
+                                                else {
+                                                    series.dummyData = chart.series.indexOf(series);
+                                                }
+                                            })
+                                            var visibleCount = newIndex;
+                                            var newMiddle = visibleCount / 2;
+
+                                            chart.series.each(function (series) {
+                                                var trueIndex = chart.series.indexOf(series);
+                                                var newIndex = series.dummyData;
+
+                                                var dx = (newIndex - trueIndex + middle - newMiddle) * delta
+
+                                                series.animate({ property: 'dx', to: dx }, series.interpolationDuration, series.interpolationEasing);
+                                                series.bulletsContainer.animate({ property: 'dx', to: dx }, series.interpolationDuration, series.interpolationEasing);
+                                            })
+                                        }
+                                    }
+                                }
+
+                                });
+                                </script>
             @endif
         @endforeach
     </div>
