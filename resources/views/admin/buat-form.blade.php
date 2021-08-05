@@ -81,6 +81,25 @@
             <!--end::Body-->
         </div>
         <!-- end::Card -->
+        <div class="card card-xl-stretch mb-xl-8">
+            <!--begin::Header-->
+            <div class="card-header border-0 d-flex flex-column mt-5 mb-4">
+                <h3 class="card-title fw-bolder text-dark">Ubah Deadline</h3>
+                <p class="text-muted fw-bold d-block mt-n2">Current Deadline {{ $valid_until }}</p>
+            </div>
+            <!--end::Header-->
+            <!--begin::Body-->
+            <div class="card-body pt-0">
+                <form action="{{ route('dashboard.edit-valid-until') }}" method="post">
+                    @csrf
+                    <input type="date" name="valid_until" class="form-control me-2 mb-3">
+                    <input type="hidden" name="form_id" class="form-control me-2 mb-3" value="{{ $form_id }}">
+                    <input type="submit" class="btn btn-sm btn-primary me-2 mt-3" value="Update">
+                </form>
+            </div>
+            <!--end::Body-->
+        </div>
+        
     </div>
     <div class="col">
         <!-- begin::Card -->

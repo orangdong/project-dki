@@ -124,6 +124,7 @@ class AdminController extends Controller
             'user' => $user,
             'form_id' => $form_id,
             'form_title' => $form->title,
+            'valid_until' => $form->valid_until,
             'spek_form' => $spek_form,
             'user_unit' => $user_unit,
             'form_tujuan' => $form_tujuan,
