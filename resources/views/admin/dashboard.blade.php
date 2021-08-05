@@ -36,8 +36,10 @@
                     </div>
                     <!--end::Title-->
                     <!--begin::Lable-->
-                    <form action="">
+                    <form action="{{ route('dashboard.edit-valid-until') }}" method="post">
+                        @csrf
                         <input type="date" name="valid_until" class="form-control me-2 mb-3">
+                        <input type="hidden" name="form_id" class="form-control me-2 mb-3" value="{{ $f->id }}">
                         <input type="submit" class="btn btn-sm btn-info me-2" style="float:right" value="Update">
                     </form>
                     <!--end::Lable-->

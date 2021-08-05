@@ -55,7 +55,7 @@ class AdminController extends Controller
 
     public function export(){
         $user = Auth::user();
-        $spek_form = SpekForm::with('form')->get();
+        $spek_form = SpekForm::with('form')->orderBy('form_id')->get();
         
         return view('admin.export', [
             'user' => $user,
@@ -219,6 +219,14 @@ class AdminController extends Controller
         SpekSubForm::where('spek_form_id', $spek_form_id)->delete();
 
         return redirect(route('dashboard.buat-form').'?id='.$form_id);
+    }
+
+    public function edit_valid_until(Request $request){
+        $form_id = $request->input('form_id');
+        $valid_until = $request->input('valid_until');
+        Form::whereid($form_id)->update(['valid_until' => $valid_until]);
+
+        return redirect(route('dashboard.admin'));
     }
 
     public function submit_export(Request $request){
