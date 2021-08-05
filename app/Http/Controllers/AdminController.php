@@ -35,7 +35,7 @@ class AdminController extends Controller
         $user = User::where('id', $user_id)->first();
 
         $user->update($data);
-        return redirect(route('dashboard.user-management'));
+        return redirect(route('dashboard.user-management'))->with('success','Edit user berhasil');
     }
 
     public function change_user_password(Request $request){
@@ -50,7 +50,7 @@ class AdminController extends Controller
 
         $user->update($update);
 
-        return redirect(route('dashboard.user-management'));
+        return redirect(route('dashboard.user-management'))->with('success','Ubah password berhasil');
     }
 
     public function export(){
@@ -93,11 +93,11 @@ class AdminController extends Controller
         $current_code = StaffCode::first()->staff_code;
 
         if($code != $code_confirmation){
-            return redirect(route('dashboard.staff-code').'?error=1&message=Kode%20konfirmasi%20tidak%20sesuai');
+            return redirect(route('dashboard.staff-code'))->with('danger','Kode konfirmasi tidak sesuai');
         }
 
         if($code == $current_code){
-            return redirect(route('dashboard.staff-code').'?error=1&message=Kode%20tidak%20boleh%20sama%20dengan%20yang%20lama');
+            return redirect(route('dashboard.staff-code'))->with('danger','Kode tidak boleh sama dengan yang lama');
         }
 
         $update = [
@@ -106,7 +106,7 @@ class AdminController extends Controller
 
         StaffCode::where('staff_code', $current_code)->update($update);
 
-        return redirect(route('dashboard.staff-code').'?error=0&message=Kode%20staff%20berhasil%20diganti');
+        return redirect(route('dashboard.staff-code'))->with('success','Ubah staff code berhasil');
     }
 
     public function buat_form(Request $request){
@@ -117,7 +117,7 @@ class AdminController extends Controller
         $user_unit = UserUnit::all();
         $form_tujuan = FormTujuan::where('form_id',$form_id)->get();
         if(!$form_id){
-            return redirect(route('dashboard.admin'));
+            return redirect(route('dashboard.admin'))->with('warning','Forbidden');
         }
         return view('admin.buat-form', [
             'user' => $user,
@@ -143,7 +143,7 @@ class AdminController extends Controller
         ]);
         $form = Form::where([['title',$title],['description',$description]])->first();
 
-        return redirect(route('dashboard.buat-form').'?id='.$form->id);
+        return redirect(route('dashboard.buat-form').'?id='.$form->id)->with('success','Berhasil membuat form baru');
     }
 
     public function spek_form_tunggal(Request $request){
@@ -159,7 +159,7 @@ class AdminController extends Controller
             'data' => $data
         ]);
 
-        return redirect(route('dashboard.buat-form').'?id='.$form_id);
+        return redirect(route('dashboard.buat-form').'?id='.$form_id)->with('success','Berhasil menambah pertanyaan');
     }
 
     public function spek_form_ganda(Request $request){
@@ -189,7 +189,7 @@ class AdminController extends Controller
             SpekSubForm::create($spek_sub_form);
         }
 
-        return redirect(route('dashboard.buat-form').'?id='.$form_id);
+        return redirect(route('dashboard.buat-form').'?id='.$form_id)->with('success','Berhasil menambah pertanyaan');
     }
 
     public function edit_tujuan_form(Request $request){
@@ -199,7 +199,7 @@ class AdminController extends Controller
         $tujuan = $request->input('tujuan');
 
         if(empty($tujuan)){
-            return redirect(route('dashboard.buat-form').'?id='.$form_id);
+            return redirect(route('dashboard.buat-form').'?id='.$form_id)->with('warning','Form nonaktif');
         }
         
         foreach($tujuan as $t){
@@ -209,7 +209,7 @@ class AdminController extends Controller
             ]);
         }
 
-        return redirect(route('dashboard.buat-form').'?id='.$form_id);
+        return redirect(route('dashboard.buat-form').'?id='.$form_id)->with('success','Tujuan unit telah diperbaharui');
     }
 
     public function hapus_spek_form(Request $request){
@@ -218,7 +218,7 @@ class AdminController extends Controller
         SpekForm::whereid($spek_form_id)->delete();
         SpekSubForm::where('spek_form_id', $spek_form_id)->delete();
 
-        return redirect(route('dashboard.buat-form').'?id='.$form_id);
+        return redirect(route('dashboard.buat-form').'?id='.$form_id)->with('warning','Pertanyaan telah dihapus');
     }
 
     public function edit_valid_until(Request $request){
@@ -226,7 +226,7 @@ class AdminController extends Controller
         $valid_until = $request->input('valid_until');
         Form::whereid($form_id)->update(['valid_until' => $valid_until]);
 
-        return redirect(route('dashboard.admin'));
+        return redirect(route('dashboard.admin'))->with('success','Perubahan deadline berhasil');
     }
 
     public function submit_export(Request $request){

@@ -57,7 +57,7 @@ class UserController extends Controller
         $password = $request->input('password');
 
         if(!Hash::check($current_password, $user->password)){
-            return redirect(route('dahboard.profile').'?error=1&message=Password%20lama%20tidak%20sesuai');
+            return redirect(route('dahboard.profile'))->with('danger','Password lama tidak sesuai');
         }
 
         $update = [
@@ -67,7 +67,7 @@ class UserController extends Controller
         $user->update($update);
 
         Auth::login($user);
-        return redirect(route('dashboard.profile').'?success=1&message=Password%20berhasil%20diganti');
+        return redirect(route('dashboard.profile'))->with('success','Ubah password berhasil');
     }    
 
     public function edit_profile(Request $request){
@@ -94,7 +94,7 @@ class UserController extends Controller
 
         User::where('id', $user->id)->update($update);
 
-        return redirect(route('dashboard.profile').'?success=1&message=Profile%20berhasil%20diganti');
+        return redirect(route('dashboard.profile'))->with('success','Edit profile berhasil');
     }
 
     public function edit(){
@@ -113,7 +113,7 @@ class UserController extends Controller
         $form = Form::whereid($form_id)->first();
         $spek_form = SpekForm::where('form_id',$form_id)->with('spek_sub_forms')->get();
         if(!$form_id){
-            return redirect(route('dashboard.admin'));
+            return redirect(route('dashboard.admin'))->with('warning','Forbidden');
         }
         return view('user.isi-form', [
             'user' => $user,
@@ -144,14 +144,14 @@ class UserController extends Controller
                 ]);
             }
         }
-        return redirect(route('dashboard.admin'));
+        return redirect(route('dashboard.admin'))->with('success','Submit form berhasil');
     }
     
     public function view_form(Request $request){
         $user = Auth::user();
         $form_id = $request->input('id');
         if(!$form_id){
-            return redirect(route('dashboard.admin'));
+            return redirect(route('dashboard.admin'))->with('warning','Forbidden');
         }
         $form = Form::whereid($form_id)->first();
         $spek_form = SpekForm::where('form_id',$form_id)->with(['spek_sub_forms','form_values' => function($query){
@@ -170,21 +170,20 @@ class UserController extends Controller
         $form_id = $request->input('id');
 
         if(!$form_id){
-            return redirect(route('dashboard.admin'));
+            return redirect(route('dashboard.admin'))->with('warning','Forbidden');
         }
 
         $jumlah_spek_form = SpekForm::where('form_id',$form_id)->count();
         $jumlah_spek_form_diisi = FormValue::where([['user_id',$user->id],['form_id',$form_id]])->count();
 
         if($jumlah_spek_form <= $jumlah_spek_form_diisi){
-            return redirect(route('dashboard.admin'));
+            return redirect(route('dashboard.admin'))->with('warning','Form telah seutuhnya diisi');
         }
         
         $form = Form::whereid($form_id)->first();
         $spek_form = SpekForm::where('form_id',$form_id)->with(['spek_sub_forms','form_values' => function($query){
             $query->where('user_id',Auth::user()->id);
         }])->get();
-        //return $spek_form;
         return view('user.edit-form', [
             'user' => $user,
             'spek_form' => $spek_form,
