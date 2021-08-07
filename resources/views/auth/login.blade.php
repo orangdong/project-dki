@@ -72,10 +72,10 @@
 								</div>
 								<!--begin::Heading-->
 								@if (session('status'))
-									<div class="mb-4 font-medium text-sm text-green-600">
+                                    <div style="font-size: 16px;line-height: 1.25rem;color: rgba(5, 150, 105);font-weight: 500;" class="mb-4">
 										{{ session('status') }}
 									</div>
-								@endif
+                                @endif
 								<div class="fv-row mb-10">
 								@if ($errors->any())
     								<div class="alert alert-danger" role="alert">
