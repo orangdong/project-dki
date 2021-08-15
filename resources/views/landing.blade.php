@@ -3,7 +3,7 @@
     <head>
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Elements by BuildWith Angga</title>
+      <title>Biro KDH Setda DKI Jakarta</title>
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     </head>
     <body>
@@ -448,8 +448,12 @@
                 </ul>
               </div>
               <div class="modal-footer border-0" style="padding: 2rem; padding-top: 0.75rem">
+                @auth
+                <a href="{{url('/dashboard')}}" class="btn btn-fill text-white">Dashboard</a>
+                @else
                 <a href="{{route('login')}}" class="btn btn-default btn-no-fill">Sign In</a>
                 <a href="{{route('register')}}" class="btn btn-fill text-white">Register</a>
+                @endauth
               </div>
             </div>
           </div>
@@ -496,8 +500,12 @@
               </form>
             </li>
           </ul>
+          @auth
+          <a href="{{url('/dashboard')}}" class="btn btn-fill text-white">Dashboard</a>
+          @else
           <a href="{{route('login')}}" class="btn btn-default btn-no-fill">Sign In</a>
           <a href="{{route('register')}}" class="btn btn-fill text-white">Register</a>
+          @endauth
         </div>
       </nav>
       <div class="hr">
