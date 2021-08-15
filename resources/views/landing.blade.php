@@ -385,9 +385,10 @@
     </style>
     <div class="header-3-3 container-xxl mx-auto p-0 position-relative" style="font-family: 'Poppins', sans-serif">
       <nav class="navbar navbar-expand-lg navbar-light">
-        <a href="#">
+        <a style=" text-decoration: none !important;" class="d-flex" href="#">
           <img style="margin-right: 0.75rem"
-            src="http://api.elements.buildwithangga.com/storage/files/2/assets/Header/Header3/Header-3-6.png" alt="" />
+            src="{{asset('media/logos/logo-dki.png')}}" width="45px" height="50px" alt="" />
+            <p style="max-width: 130px; color: #243142; font-weight: 600">Biro KDH Setda DKI Jakarta</p>
         </a>
         <button class="navbar-toggler border-0" type="button" data-bs-toggle="modal" data-bs-target="#targetModal-item">
           <span class="navbar-toggler-icon"></span>
@@ -412,14 +413,12 @@
                     <a class="nav-link main" style="color: #243142;" href="#">Home</a>
                   </li>
                   <li class="nav-item position-relative">
-                    <a class="nav-link" href="#">Feature</a>
+                    <a class="nav-link" href="#feature">Feature</a>
                   </li>
                   <li class="nav-item position-relative">
-                    <a class="nav-link" href="#">Pricing</a>
+                    <a class="nav-link" href="#">About Us</a>
                   </li>
-                  <li class="nav-item position-relative">
-                    <a class="nav-link" href="#">Blog</a>
-                  </li>
+                  
                 </ul>
               </div>
               <div class="modal-footer border-0" style="padding: 2rem; padding-top: 0.75rem">
@@ -440,14 +439,12 @@
               <a class="nav-link main=" style="color: #243142;" href="#">Home</a>
             </li>
             <li class="nav-item position-relative">
-              <a class="nav-link" href="#">Feature</a>
+              <a class="nav-link" href="#feature">Feature</a>
             </li>
             <li class="nav-item position-relative">
-              <a class="nav-link" href="#">Pricing</a>
+              <a class="nav-link" href="#">About Us</a>
             </li>
-            <li class="nav-item position-relative">
-              <a class="nav-link" href="#">Blog</a>
-            </li>
+            
           </ul>
           @auth
           <a href="{{url('/dashboard')}}" class="btn btn-fill text-white">Dashboard</a>
@@ -482,19 +479,20 @@
               are here to help you
             </p>
             <div class="d-flex flex-sm-row flex-column align-items-center mx-auto mx-lg-0 justify-content-center gap-3">
-              <button class="btn btn-get text-white d-inline-flex">
-                Get Started
-              </button>
+              @auth
+              <a href="{{url('/dashboard')}}" class="btn btn-get text-white d-inline-flex">
+                Dashboard
+              </a>
+              @else
+              <a href="{{route('register')}}" class="btn btn-get text-white d-inline-flex">
+                Register
+              </a>
+              @endauth
+              
               <button class="btn btn-outline">
                 <div class="d-flex align-items-center">
-                  <svg class="me-2" width="26" height="26" viewBox="0 0 26 26" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M15.9295 13L11.6668 10.158V15.842L15.9295 13ZM17.9175 13.2773L10.8515 17.988C10.8013 18.0214 10.743 18.0406 10.6828 18.0434C10.6225 18.0463 10.5627 18.0328 10.5095 18.0044C10.4563 17.9759 10.4119 17.9336 10.3809 17.8818C10.3499 17.8301 10.3335 17.771 10.3335 17.7107V8.28933C10.3335 8.22904 10.3499 8.16988 10.3809 8.11816C10.4119 8.06644 10.4563 8.0241 10.5095 7.99564C10.5627 7.96718 10.6225 7.95367 10.6828 7.95655C10.743 7.95943 10.8013 7.9786 10.8515 8.012L17.9175 12.7227C17.9631 12.7531 18.0006 12.7943 18.0265 12.8427C18.0524 12.8911 18.0659 12.9451 18.0659 13C18.0659 13.0549 18.0524 13.1089 18.0265 13.1573C18.0006 13.2057 17.9631 13.2469 17.9175 13.2773Z"
-                      fill="#A6B1BE" />
-                    <rect x="0.5" y="0.5" width="25" height="25" rx="12.5" stroke="#A6B1BE" />
-                  </svg>
-                  Watch the video
+                  
+                  About Us
                 </div>
               </button>
             </div>
@@ -505,37 +503,7 @@
             <img class="position-absolute d-lg-block d-none hero-right"
               src="http://api.elements.buildwithangga.com/storage/files/2/assets/Header/Header3/Header-3-2.png"
               alt="" />
-            <div class="d-flex align-items-end card-outer">
-              <div class="mx-auto d-flex flex-wrap align-items-center">
-                <div class="card border-0 position-relative d-flex flex-column">
-                  <div class="d-flex align-items-center" style="margin-bottom: 1.25rem">
-                    <div>
-                      <img style="margin-right: 1rem"
-                        src="http://api.elements.buildwithangga.com/storage/files/2/assets/Header/Header3/Header-3-3.png"
-                        alt="" />
-                    </div>
-                    <div class="text-start">
-                      <p class="card-name">Felix Potah</p>
-                      <p class="card-job">Pro Mentor</p>
-                    </div>
-                  </div>
-                  <div class="row text-start" style="margin-bottom: 1.25rem">
-                    <div class="col-6">
-                      <p class="card-price-left">64,100</p>
-                      <p class="card-caption">Followers</p>
-                    </div>
-                    <div class="col-6 ps-0">
-                      <p class="card-price-right">106</p>
-                      <p class="card-caption">Reviews</p>
-                    </div>
-                  </div>
-                  <button class="btn btn-hire text-white">
-                    <div class="test d-none">show</div>
-                    Hire Me
-                  </button>
-                </div>
-              </div>
-            </div>
+            
           </div>
         </div>
       </div>
@@ -600,7 +568,8 @@
       }
 
       .content-3-2 .btn:hover {
-        background-color: #45dbb2;
+        background-color: #6DA4F9;
+        border: 1px solid #6DA4F9;
         transition: 0.3s;
       }
 
@@ -636,8 +605,8 @@
         </div>
 
         <!-- Right Column -->
-        <div class="right-column d-flex flex-column align-items-lg-start align-items-center text-lg-start text-center">
-          <h2 class="title-text">3 Keys Benefit</h2>
+        <div id="feature" class="right-column d-flex flex-column align-items-lg-start align-items-center text-lg-start text-center">
+          <h2 class="title-text">3 Fitur Utama</h2>
           <ul style="padding: 0; margin: 0">
             <li class="list-unstyled" style="margin-bottom: 2rem">
               <h4
@@ -645,11 +614,11 @@
                 <span class="circle text-white d-flex align-items-center justify-content-center">
                   1
                 </span>
-                Trusted Mentor
+                Buat Form Pendataan
               </h4>
               <p class="text-caption">
-                We have provided highly experienced mentors<br class="d-sm-inline d-none" />
-                for several years.
+                Pengumpulan data kini lebih mudah hanya dengan satu<br class="d-sm-inline d-none" />
+                halaman langsung bisa terkirim ke unit tujuan.
               </p>
             </li>
             <li class="list-unstyled" style="margin-bottom: 2rem">
@@ -658,11 +627,11 @@
                 <span class="circle text-white d-flex align-items-center justify-content-center">
                   2
                 </span>
-                Access Forever
+                Management User
               </h4>
               <p class="text-caption">
-                Are you busy at work so it's hard to consult? don't<br class="d-sm-inline d-none" />
-                worry because you can access anytime.
+                Semua user dari berbagai unit dapat diatur melalui satu<br class="d-sm-inline d-none" />
+                halaman di mana pun dan kapan pun.
               </p>
             </li>
             <li class="list-unstyled" style="margin-bottom: 4rem">
@@ -671,15 +640,20 @@
                 <span class="circle text-white d-flex align-items-center justify-content-center">
                   3
                 </span>
-                Halfpenny
+                Export Data
               </h4>
               <p class="text-caption">
-                We provide economical packages for those of you<br class="d-sm-inline d-none" />
-                who are still in school or workers.
+                Data yang telah dikumpulkan dapat diexport berupa<br class="d-sm-inline d-none" />
+                file pdf yang disertai oleh chart yang menarik.
               </p>
             </li>
           </ul>
-          <button class="btn btn-learn text-white">Learn More</button>
+          @auth
+          <a href="{{url('/dashboard')}}" class="btn btn-learn text-white">Dashboard</a>
+          @else
+          <a href="{{route('register')}}" class="btn btn-learn text-white">Register</a>
+          @endauth
+          
         </div>
       </div>
     </div>
@@ -775,86 +749,36 @@
 
 		<div class="footer-2-2 container-xxl mx-auto position-relative p-0" style="font-family: 'Poppins', sans-serif">
 			<div class="list-footer">
-				<div class="row gap-md-0 gap-3">
+				<div class="row gap-md-0 gap-3 justify-content-between">
 					<div class="col-lg-3 col-md-6">
 						<div class="">
 							<div class="list-space">
-								<img src="http://api.elements.buildwithangga.com/storage/files/2/assets/Header/Header2/Header-2-5.png"
-									alt="" />
+								<img src="{{asset('media/logos/logo-dki.png')}}"
+									alt="" width="50px" height="50px" />
 							</div>
 							<nav class="list-unstyled">
 								<li class="list-space">
-									<a href="" class="list-menu">Home</a>
+									<a href="#" class="list-menu">Home</a>
 								</li>
 								<li class="list-space">
-									<a href="" class="list-menu">About</a>
+									<a href="#feature" class="list-menu">Features</a>
 								</li>
 								<li class="list-space">
-									<a href="" class="list-menu">Features</a>
-								</li>
-								<li class="list-space">
-									<a href="" class="list-menu">Pricing</a>
-								</li>
-								<li class="list-space">
-									<a href="" class="list-menu">Testimonial</a>
-								</li>
-								<li class="list-space">
-									<a href="" class="list-menu">Help</a>
+									<a href="#" class="list-menu">About Us</a>
 								</li>
 							</nav>
 						</div>
 					</div>
-					<div class="col-lg-3 col-md-6">
-						<h2 class="footer-text-title">Product</h2>
+					<div class="col-lg-4 col-md-6 about-company">
+						<h2 class="footer-text-title">Biro KDH Setda DKI Jakarta</h2>
 						<nav class="list-unstyled">
 							<li class="list-space">
-								<a href="" class="list-menu">Real Time Analytic</a>
-							</li>
-							<li class="list-space">
-								<a href="" class="list-menu">Easy to Operate</a>
-							</li>
-							<li class="list-space">
-								<a href="" class="list-menu">Full Secured</a>
-							</li>
-							<li class="list-space">
-								<a href="" class="list-menu">Analytic Tool</a>
-							</li>
-							<li class="list-space">
-								<a href="" class="list-menu">Story</a>
+								<p class="list-menu">Jl. Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
 							</li>
 						</nav>
 					</div>
-					<div class="col-lg-3 col-md-6">
-						<h2 class="footer-text-title">Company</h2>
-						<nav class="list-unstyled">
-							<li class="list-space">
-								<a href="" class="list-menu">Contact Us</a>
-							</li>
-							<li class="list-space">
-								<a href="" class="list-menu">Blog</a>
-							</li>
-							<li class="list-space">
-								<a href="" class="list-menu">Culture</a>
-							</li>
-							<li class="list-space">
-								<a href="" class="list-menu">Security</a>
-							</li>
-						</nav>
-					</div>
-					<div class="col-lg-3 col-md-6">
-						<h2 class="footer-text-title">Support</h2>
-						<nav class="list-unstyled">
-							<li class="list-space">
-								<a href="" class="list-menu">Getting Started</a>
-							</li>
-							<li class="list-space">
-								<a href="" class="list-menu">Help Center</a>
-							</li>
-							<li class="list-space">
-								<a href="" class="list-menu">Server Status</a>
-							</li>
-						</nav>
-					</div>
+					
+					
 				</div>
 			</div>
 
@@ -910,32 +834,12 @@
 									fill="#C7C7C7" />
 							</svg>
 						</a>
-						<a href="">
-							<svg class="social-media-c" width="30" height="30" viewBox="0 0 30 30" fill="none"
-								xmlns="http://www.w3.org/2000/svg">
-								<circle cx="15" cy="15" r="15" fill="#C7C7C7" />
-								<g clip-path="url(#clip0)">
-									<path
-										d="M17.9027 22.4467C17.916 22.4427 17.9287 22.4373 17.942 22.4327C26.0853 19.1973 23.8327 7 15 7C10.5673 7 7 10.6133 7 15C7 20.5513 12.6227 24.5127 17.9027 22.4467ZM10.5207 20.3727C11.0887 19.418 12.9267 16.7247 16.064 15.7953C16.72 17.468 17.18 19.4193 17.2253 21.632C14.848 22.4313 12.3407 21.8933 10.5207 20.3727V20.3727ZM18.2087 21.2147C18.1213 19.0887 17.6873 17.2033 17.0687 15.57C18.4567 15.3533 20.0633 15.498 21.8853 16.228C21.498 18.402 20.108 20.2293 18.2087 21.2147V21.2147ZM21.99 15.194C19.9833 14.44 18.2147 14.346 16.684 14.638C16.4473 14.1047 16.1987 13.592 15.9353 13.12C18.284 12.182 19.672 11.0387 20.2933 10.4333C21.39 11.7027 22.0413 13.346 21.99 15.194V15.194ZM19.5833 9.72133C19.018 10.2593 17.6867 11.346 15.41 12.2347C14.294 10.4693 13.1007 9.224 12.3447 8.52667C14.7633 7.53067 17.5527 7.956 19.5833 9.72133V9.72133ZM11.3887 9.01533C11.9593 9.51733 13.212 10.7227 14.4207 12.5867C12.7607 13.1213 10.6793 13.514 8.148 13.5693C8.55067 11.64 9.75333 10.0053 11.3887 9.01533V9.01533ZM8.02133 14.5733C10.8547 14.5273 13.148 14.08 14.9607 13.4747C15.2113 13.914 15.4493 14.3927 15.678 14.89C12.5213 15.8953 10.5487 18.4907 9.79333 19.6627C8.57467 18.3027 7.90267 16.528 8.02133 14.5733V14.5733Z"
-										fill="white" />
-								</g>
-								<defs>
-									<clipPath id="clip0">
-										<rect width="16" height="16" fill="white" transform="translate(7 7)" />
-									</clipPath>
-								</defs>
-							</svg>
-						</a>
 					</div>
 					<nav class="mx-auto d-flex flex-wrap align-items-center justify-content-center gap-4">
-						<a href="" class="footer-link" style="text-decoration: none">Terms of Service</a>
-						<span>|</span>
-						<a href="" class="footer-link" style="text-decoration: none">Privacy Policy</a>
-						<span>|</span>
-						<a href="" class="footer-link" style="text-decoration: none">Licenses</a>
+						<p style="margin: 0">Copyright © 2021 Biro KDH Setda DKI Jakarta</p>
 					</nav>
 					<nav class="d-flex flex-lg-row flex-column align-items-center justify-content-center">
-						<p style="margin: 0">Copyright © 2021 Analystic Max</p>
+						<p style="margin: 0">Telp. (021) 123456</p>
 					</nav>
 				</div>
 			</div>
