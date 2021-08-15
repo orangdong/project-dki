@@ -4,6 +4,7 @@
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <title>Biro KDH Setda DKI Jakarta</title>
+      <link rel="shortcut icon" href="{{ asset('media/logos/logo-dki.png') }}" />
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     </head>
     <body>
@@ -419,32 +420,6 @@
                   <li class="nav-item position-relative">
                     <a class="nav-link" href="#">Blog</a>
                   </li>
-                  <li class="nav-item position-relative">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#collapse" role="button" aria-expanded="false"
-                      aria-controls="collapse">
-                      <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd"
-                          d="M5.85 1.69346C3.5304 1.69346 1.65 3.57386 1.65 5.89346C1.65 8.21305 3.5304 10.0935 5.85 10.0935C8.1696 10.0935 10.05 8.21305 10.05 5.89346C10.05 3.57386 8.1696 1.69346 5.85 1.69346ZM0.25 5.89346C0.25 2.80066 2.75721 0.293457 5.85 0.293457C8.94279 0.293457 11.45 2.80066 11.45 5.89346C11.45 8.98625 8.94279 11.4935 5.85 11.4935C2.75721 11.4935 0.25 8.98625 0.25 5.89346Z"
-                          fill="#8B9CAF" />
-                        <path fill-rule="evenodd" clip-rule="evenodd"
-                          d="M8.85503 8.89848C9.12839 8.62512 9.57161 8.62512 9.84497 8.89848L14.045 13.0985C14.3183 13.3718 14.3183 13.8151 14.045 14.0884C13.7716 14.3618 13.3284 14.3618 13.055 14.0884L8.85503 9.88843C8.58166 9.61506 8.58166 9.17185 8.85503 8.89848Z"
-                          fill="#8B9CAF" />
-                      </svg>
-                    </a>
-                    <form method class="collapse position-absolute form center-search border-0" id="collapse">
-                      <div class="d-flex">
-                        <input type="text" class="rounded-full border-0 focus:outline-none" placeholder="Search" />
-                        <button class="btn" type="button">
-                          <svg style="width: 20px; height: 20px" data-bs-toggle="collapse" href="#collapse"
-                            role="button" aria-expanded="false" aria-controls="collapse" fill="none" stroke="#273B56"
-                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M6 18L18 6M6 6l12 12"></path>
-                          </svg>
-                        </button>
-                      </div>
-                    </form>
-                  </li>
                 </ul>
               </div>
               <div class="modal-footer border-0" style="padding: 2rem; padding-top: 0.75rem">
@@ -472,32 +447,6 @@
             </li>
             <li class="nav-item position-relative">
               <a class="nav-link" href="#">Blog</a>
-            </li>
-            <li class="nav-item my-auto">
-              <a class="nav-link" data-bs-toggle="collapse" href="#collapse" role="button" aria-expanded="false"
-                aria-controls="collapse">
-                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" clip-rule="evenodd"
-                    d="M5.85 1.69346C3.5304 1.69346 1.65 3.57386 1.65 5.89346C1.65 8.21305 3.5304 10.0935 5.85 10.0935C8.1696 10.0935 10.05 8.21305 10.05 5.89346C10.05 3.57386 8.1696 1.69346 5.85 1.69346ZM0.25 5.89346C0.25 2.80066 2.75721 0.293457 5.85 0.293457C8.94279 0.293457 11.45 2.80066 11.45 5.89346C11.45 8.98625 8.94279 11.4935 5.85 11.4935C2.75721 11.4935 0.25 8.98625 0.25 5.89346Z"
-                    fill="#8B9CAF" />
-                  <path fill-rule="evenodd" clip-rule="evenodd"
-                    d="M8.85503 8.89848C9.12839 8.62512 9.57161 8.62512 9.84497 8.89848L14.045 13.0985C14.3183 13.3718 14.3183 13.8151 14.045 14.0884C13.7716 14.3618 13.3284 14.3618 13.055 14.0884L8.85503 9.88843C8.58166 9.61506 8.58166 9.17185 8.85503 8.89848Z"
-                    fill="#8B9CAF" />
-                </svg>
-              </a>
-              <form class="collapse position-absolute form center-search border-0" id="collapse">
-                <div class="d-flex">
-                  <input type="text" class="rounded-full border-0 focus:outline-none" placeholder="Search" />
-                  <button class="btn" type="button">
-                    <svg style="width: 20px; height: 20px" data-bs-toggle="collapse" href="#collapse" role="button"
-                      aria-expanded="false" aria-controls="collapse" fill="none" stroke="#273B56" viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
-                      </path>
-                    </svg>
-                  </button>
-                </div>
-              </form>
             </li>
           </ul>
           @auth
